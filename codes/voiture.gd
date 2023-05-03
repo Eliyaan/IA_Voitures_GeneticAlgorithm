@@ -17,9 +17,9 @@ var nn = {
 func set_rd_wb_values():
 	#Weights
 	for i in range(nn["weights_list"].size()):
-		for j in range(nn["weights_list"][i][0].size()):
-			for k in range(nn["weights_list"][i][0][j].size()):
-				nn["weights_list"][i][0][j][k] = randf_range(-1, 1)
+		for j in range(nn["weights_list"][i].size()):
+			for k in range(nn["weights_list"][i][j].size()):
+				nn["weights_list"][i][j][k] = randf_range(-1, 1)
 	#Biases 
 	for i in range(nn["layers_list"].size()):
 		for j in range(nn["layers_list"][i][0].size()):
@@ -36,10 +36,10 @@ func fprop(inputs):
 			var nactiv = 0
 			if i == 0:
 				for k in range(inputs.size()):  # Pour chaque input
-					nactiv += nn["weights_list"][i][0][j][k] * inputs[k] #Le bon weight fois le bon input
+					nactiv += nn["weights_list"][i][j][k] * inputs[k] #Le bon weight fois le bon input
 			else:
 				for k in range(nn["layers_list"][i-1][0].size()):  # Pour chaque input pareil pour le 0 cette fois aussi
-					nactiv += nn["weights_list"][i][0][j][k] * nn["layers_list"][i-1][1][k] #Le bon weight fois le bon output de la layer d'avant	
+					nactiv += nn["weights_list"][i][j][k] * nn["layers_list"][i-1][1][k] #Le bon weight fois le bon output de la layer d'avant	
 			nactiv += nn["layers_list"][i][0][j]  # Ajout du bias
 			nn["layers_list"][i][1][j] = sigmoid(nactiv)  #activation function
 	return nn["layers_list"][nn["nb_hidden_layer"]][1]
@@ -59,7 +59,7 @@ func init():
 	nn["weights_list"] = []
 	nn["weights_list"].resize(nn["nb_hidden_layer"]+1)
 	for i in range(nn["weights_list"].size()):
-		nn["weights_list"][i] = [[[]],[[]]]
+		nn["weights_list"][i] = [[]]
 	#Init empty layers
 	nn["layers_list"] = []
 	nn["layers_list"].resize(nn["nb_hidden_layer"]+1)
@@ -68,23 +68,22 @@ func init():
 		
 	for i in range(0, nn["nb_hidden_layer"]+1):
 		if i == 0:
-			nn["weights_list"][i][0] = []
-			nn["weights_list"][i][0].resize(nn["nb_hidden_neurones"][0])
-			for j in range(nn["weights_list"][i][0].size()):
-				nn["weights_list"][i][0][j] = []
-				nn["weights_list"][i][0][j].resize(nn["nb_inputs"])
+			nn["weights_list"][i].resize(nn["nb_hidden_neurones"][0])
+			for j in range(nn["weights_list"][i].size()):
+				nn["weights_list"][i][j] = []
+				nn["weights_list"][i][j].resize(nn["nb_inputs"])
 		elif i == nn["nb_hidden_layer"]:
-			nn["weights_list"][i][0] = []
-			nn["weights_list"][i][0].resize(nn["nb_outputs"])
-			for j in range(nn["weights_list"][i][0].size()):
-				nn["weights_list"][i][0][j] = []
-				nn["weights_list"][i][0][j].resize(nn["nb_hidden_neurones"][i-1])
+			nn["weights_list"][i] = []
+			nn["weights_list"][i].resize(nn["nb_outputs"])
+			for j in range(nn["weights_list"][i].size()):
+				nn["weights_list"][i][j] = []
+				nn["weights_list"][i][j].resize(nn["nb_hidden_neurones"][i-1])
 		else:
-			nn["weights_list"][i][0] = []
-			nn["weights_list"][i][0].resize(nn["nb_hidden_neurones"][i])
-			for j in nn["weights_list"][i][0]:
-				nn["weights_list"][i][0][j] = []
-				nn["weights_list"][i][0][j].resize(nn["nb_hidden_neurones"][i-1])
+			nn["weights_list"][i] = []
+			nn["weights_list"][i].resize(nn["nb_hidden_neurones"][i])
+			for j in nn["weights_list"][i]:
+				nn["weights_list"][i][j] = []
+				nn["weights_list"][i][j].resize(nn["nb_hidden_neurones"][i-1])
 	for i in range(0, nn["nb_hidden_layer"]+1):
 		if i == nn["nb_hidden_layer"]:
 			for j in range(nn["layers_list"][i].size()):
