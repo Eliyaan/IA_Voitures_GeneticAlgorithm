@@ -20,7 +20,6 @@ func set_rd_wb_values():
 		for j in range(nn["weights_list"][i][0].size()):
 			for k in range(nn["weights_list"][i][0][j].size()):
 				nn["weights_list"][i][0][j][k] = randf_range(-1, 1)
-	print(nn["weights_list"])
 	#Biases 
 	for i in range(nn["layers_list"].size()):
 		for j in range(nn["layers_list"][i][0].size()):
@@ -36,7 +35,6 @@ func fprop(inputs):
 		for j in range(nn["layers_list"][i][2].size()):
 			var nactiv = 0
 			if i == 0:
-				print(nn["weights_list"][i][0][j])
 				for k in range(inputs.size()):  # Pour chaque input
 					nactiv += nn["weights_list"][i][0][j][k] * inputs[k] #Le bon weight fois le bon input
 			else:
@@ -44,7 +42,7 @@ func fprop(inputs):
 					nactiv += nn["weights_list"][i][0][j][k] * nn["layers_list"][i-1][3][k] #Le bon weight fois le bon input	
 			nactiv += nn["layers_list"][i][0][j]  # Ajout du bias
 			nn["layers_list"][i][3][j] = sigmoid(nactiv)  #activation function
-	return nn["layers_list"][nn["nb_hidden_layer"]]
+	return nn["layers_list"][nn["nb_hidden_layer"]][3]
 	
 
 
@@ -125,5 +123,5 @@ func _process(_delta):
 
 func think(inputs):
 	reset()
-	fprop(inputs)
+	return fprop(inputs)
 	
