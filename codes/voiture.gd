@@ -32,41 +32,40 @@ func sigmoid(value):
 
 func fprop(inputs):
 	for i in range(nn["layers_list"].size()):
-		for j in range(nn["layers_list"][i][2].size()):
+		for j in range(nn["layers_list"][i][0].size()): #the 0 is to get the size of the layer 
 			var nactiv = 0
 			if i == 0:
 				for k in range(inputs.size()):  # Pour chaque input
 					nactiv += nn["weights_list"][i][0][j][k] * inputs[k] #Le bon weight fois le bon input
 			else:
-				for k in range(nn["layers_list"][i-1][3].size()):  # Pour chaque input
-					nactiv += nn["weights_list"][i][0][j][k] * nn["layers_list"][i-1][3][k] #Le bon weight fois le bon input	
+				for k in range(nn["layers_list"][i-1][0].size()):  # Pour chaque input pareil pour le 0 cette fois aussi
+					nactiv += nn["weights_list"][i][0][j][k] * nn["layers_list"][i-1][1][k] #Le bon weight fois le bon output de la layer d'avant	
 			nactiv += nn["layers_list"][i][0][j]  # Ajout du bias
-			nn["layers_list"][i][3][j] = sigmoid(nactiv)  #activation function
-	return nn["layers_list"][nn["nb_hidden_layer"]][3]
+			nn["layers_list"][i][1][j] = sigmoid(nactiv)  #activation function
+	return nn["layers_list"][nn["nb_hidden_layer"]][1]
 	
 
 
 func reset():
 	#reset outputs
 	for i in range(nn["layers_list"].size()):
-		if i == nn["nb_hidden_layer"]:
-			nn["layers_list"][i][3] = []
-			nn["layers_list"][i][3].resize(nn["nb_outputs"])
-		else:
-			nn["layers_list"][i][3] = []
-			nn["layers_list"][i][3].resize(nn["nb_hidden_neurones"][i])				
+		nn["layers_list"][i][1] = []
+		nn["layers_list"][i][1].resize(nn["nb_outputs"] if i == nn["nb_hidden_layer"] else nn["nb_hidden_neurones"][i])			
 
 
 		
 func init():
+	#Init iempty weights
 	nn["weights_list"] = []
 	nn["weights_list"].resize(nn["nb_hidden_layer"]+1)
 	for i in range(nn["weights_list"].size()):
 		nn["weights_list"][i] = [[[]],[[]]]
+	#Init empty layers
 	nn["layers_list"] = []
 	nn["layers_list"].resize(nn["nb_hidden_layer"]+1)
 	for i in range(nn["layers_list"].size()):
 		nn["layers_list"][i] = [[], [], [], [], []]
+		
 	for i in range(0, nn["nb_hidden_layer"]+1):
 		if i == 0:
 			nn["weights_list"][i][0] = []
@@ -74,33 +73,18 @@ func init():
 			for j in range(nn["weights_list"][i][0].size()):
 				nn["weights_list"][i][0][j] = []
 				nn["weights_list"][i][0][j].resize(nn["nb_inputs"])
-			nn["weights_list"][i][1] = []
-			nn["weights_list"][i][1].resize(nn["nb_hidden_neurones"][0])
-			for j in range(nn["weights_list"][i][1].size()):
-				nn["weights_list"][i][1][j] = []
-				nn["weights_list"][i][1][j].resize(nn["nb_inputs"])
 		elif i == nn["nb_hidden_layer"]:
 			nn["weights_list"][i][0] = []
 			nn["weights_list"][i][0].resize(nn["nb_outputs"])
 			for j in range(nn["weights_list"][i][0].size()):
 				nn["weights_list"][i][0][j] = []
 				nn["weights_list"][i][0][j].resize(nn["nb_hidden_neurones"][i-1])
-			nn["weights_list"][i][1] = []
-			nn["weights_list"][i][1].resize(nn["nb_outputs"])
-			for j in range(nn["weights_list"][i][1].size()):
-				nn["weights_list"][i][1][j] = []
-				nn["weights_list"][i][1][j].resize(nn["nb_hidden_neurones"][i-1])
 		else:
 			nn["weights_list"][i][0] = []
 			nn["weights_list"][i][0].resize(nn["nb_hidden_neurones"][i])
 			for j in nn["weights_list"][i][0]:
 				nn["weights_list"][i][0][j] = []
 				nn["weights_list"][i][0][j].resize(nn["nb_hidden_neurones"][i-1])
-			nn["weights_list"][i][1] = []
-			nn["weights_list"][i][1].resize(nn["nb_hidden_neurones"][i])
-			for j in range(nn["weights_list"][i][1].size()):
-				nn["weights_list"][i][1][j] = []
-				nn["weights_list"][i][1][j].resize(nn["nb_hidden_neurones"][i-1])
 	for i in range(0, nn["nb_hidden_layer"]+1):
 		if i == nn["nb_hidden_layer"]:
 			for j in range(nn["layers_list"][i].size()):
@@ -116,7 +100,6 @@ func init():
 func _ready():
 	init()
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	print(think([0.9, 0.1, -1, 0.3, 0.5, 0.4, 0.1, 1.2, -0.8]))
@@ -124,4 +107,3 @@ func _process(_delta):
 func think(inputs):
 	reset()
 	return fprop(inputs)
-	
