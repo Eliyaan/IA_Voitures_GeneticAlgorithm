@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://dlbqgeld5mfxf"]
+[gd_scene load_steps=2 format=3 uid="uid://dlbqgeld5mfxf"]
 
-[node name="Node2D" type="Node2D"]
+[ext_resource type="Script" path="res://codes/voiture.gd" id="1_ct8nj"]
+
+[node name="Voiture" type="Node2D"]
+script = ExtResource("1_ct8nj")

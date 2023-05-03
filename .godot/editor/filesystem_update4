@@ -1,1 +1,4 @@
-res://main.tscn
+res://scene/voiture.tscn
+res://codes/voiture.gd
+res://scene/main.tscn
+res://codes/main.gd
