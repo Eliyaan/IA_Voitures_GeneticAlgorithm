@@ -1,6 +1,33 @@
-[gd_scene load_steps=2 format=3 uid="uid://dlbqgeld5mfxf"]
+[gd_scene load_steps=4 format=3 uid="uid://dlbqgeld5mfxf"]
 
 [ext_resource type="Script" path="res://codes/voiture.gd" id="1_ct8nj"]
+[ext_resource type="Texture2D" uid="uid://bn3pwpnpvxttj" path="res://images/Voiture.png" id="2_rnmf6"]
+[ext_resource type="Texture2D" uid="uid://ocwdd7cfxve6" path="res://images/Roue.png" id="3_gmdyq"]
 
 [node name="Voiture" type="Node2D"]
+scale = Vector2(0.25, 0.25)
 script = ExtResource("1_ct8nj")
+
+[node name="Voiture" type="Sprite2D" parent="."]
+texture = ExtResource("2_rnmf6")
+metadata/_edit_lock_ = true
+
+[node name="Roue_AvG" type="Sprite2D" parent="."]
+position = Vector2(-70, -110)
+texture = ExtResource("3_gmdyq")
+metadata/_edit_lock_ = true
+
+[node name="Roue_AvD" type="Sprite2D" parent="."]
+position = Vector2(70, -110)
+texture = ExtResource("3_gmdyq")
+metadata/_edit_lock_ = true
+
+[node name="Roue_ArG" type="Sprite2D" parent="."]
+position = Vector2(-70, 110)
+texture = ExtResource("3_gmdyq")
+metadata/_edit_lock_ = true
+
+[node name="Roue_ArD" type="Sprite2D" parent="."]
+position = Vector2(70, 110)
+texture = ExtResource("3_gmdyq")
+metadata/_edit_lock_ = true
