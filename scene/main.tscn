@@ -7,4 +7,6 @@
 script = ExtResource("1_c5d5b")
 voitures = ExtResource("2_qud33")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+
 [node name="Voitures" type="Node" parent="."]
