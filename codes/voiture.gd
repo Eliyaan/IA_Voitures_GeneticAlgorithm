@@ -1,4 +1,5 @@
 extends Node2D
+var deplac = [0, 0]
 var nn = {
 	#Consts
 	"nb_inputs" = 9,
@@ -91,7 +92,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	print(think([0.9, 0.1, -1, 0.3, 0.5, 0.4, 0.1, 1.2, -0.8]))
+	var result = think([0.9, 0.1, -1, 0.3, 0.5, 0.4, 0.1, 1.2, -0.8])
+	deplac[1] -= result[0]
+	print(deplac)
+	
+	position.x += deplac[0]
+	position.y += deplac[1]
 
 func think(inputs):
 	reset()
