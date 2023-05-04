@@ -5,29 +5,38 @@
 [ext_resource type="Texture2D" uid="uid://ocwdd7cfxve6" path="res://images/Roue.png" id="3_gmdyq"]
 
 [node name="Voiture" type="Node2D"]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.1, 0.1)
 script = ExtResource("1_ct8nj")
 
-[node name="Voiture" type="Sprite2D" parent="."]
+[node name="Controler" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Voiture" type="Sprite2D" parent="Controler"]
+position = Vector2(0, -200)
+scale = Vector2(1, 1)
 texture = ExtResource("2_rnmf6")
 metadata/_edit_lock_ = true
 
-[node name="Roue_AvG" type="Sprite2D" parent="."]
-position = Vector2(-70, -110)
+[node name="Roue_AvG" type="Sprite2D" parent="Controler"]
+position = Vector2(-70, -310)
+scale = Vector2(1, 1)
 texture = ExtResource("3_gmdyq")
 metadata/_edit_lock_ = true
 
-[node name="Roue_AvD" type="Sprite2D" parent="."]
-position = Vector2(70, -110)
+[node name="Roue_AvD" type="Sprite2D" parent="Controler"]
+position = Vector2(70, -310)
+scale = Vector2(1, 1)
 texture = ExtResource("3_gmdyq")
 metadata/_edit_lock_ = true
 
-[node name="Roue_ArG" type="Sprite2D" parent="."]
-position = Vector2(-70, 110)
+[node name="Roue_ArG" type="Sprite2D" parent="Controler"]
+position = Vector2(-70, -90)
+scale = Vector2(1, 1)
 texture = ExtResource("3_gmdyq")
 metadata/_edit_lock_ = true
 
-[node name="Roue_ArD" type="Sprite2D" parent="."]
-position = Vector2(70, 110)
+[node name="Roue_ArD" type="Sprite2D" parent="Controler"]
+position = Vector2(70, -90)
+scale = Vector2(1, 1)
 texture = ExtResource("3_gmdyq")
 metadata/_edit_lock_ = true
