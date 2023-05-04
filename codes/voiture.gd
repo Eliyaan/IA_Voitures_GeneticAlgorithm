@@ -93,13 +93,13 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	var result = think([0.9, 0.1, -1, 0.3, 0.5, 0.4, 0.1, 1.2, -0.8])
-	deplac.y -= result[0]*2 - 0
+	deplac.y -= result[0]*2 - 1
 	if deplac.y > 0:
 		deplac.y = 0
-	rotation_degrees += (result[1]*2 - 1) * deplac.y * 0.1
+	rotation_degrees += (result[1]*2 - 1) * deplac.y * 0.1  # le 0.1 c'est un facteur changeable selon si on veut qu'elle tourne plus vite ou pas
 	var changement = Vector2(deplac.rotated(rotation))
-	position.x += changement.x/10
-	position.y += changement.y/10
+	position.x += changement.x/10  # le 10 est à quel point la voiture va être ralentie, facteur changeable
+	position.y += changement.y/10 
 
 func think(inputs):
 	reset()
