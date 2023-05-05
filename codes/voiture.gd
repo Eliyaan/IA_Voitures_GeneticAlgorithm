@@ -92,6 +92,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	$Controler/RayCast2D.force_raycast_update()
+	if $Controler/RayCast2D.is_colliding():
+		print($Controler/RayCast2D.get_collision_point())
 	var result = think([0.9, 0.1, -1, 0.3, 0.5, 0.4, 0.1, 1.2, -0.8])
 	deplac.y -= result[0]*2 - 1
 	if deplac.y > 0: 
@@ -104,3 +107,4 @@ func _process(_delta):
 func think(inputs):
 	reset()
 	return fprop(inputs)
+	

@@ -13,30 +13,29 @@ metadata/_edit_lock_ = true
 
 [node name="Voiture" type="Sprite2D" parent="Controler"]
 position = Vector2(0, -200)
-scale = Vector2(1, 1)
 texture = ExtResource("2_rnmf6")
 metadata/_edit_lock_ = true
 
 [node name="Roue_AvG" type="Sprite2D" parent="Controler"]
 position = Vector2(-70, -310)
-scale = Vector2(1, 1)
 texture = ExtResource("3_gmdyq")
 metadata/_edit_lock_ = true
 
 [node name="Roue_AvD" type="Sprite2D" parent="Controler"]
 position = Vector2(70, -310)
-scale = Vector2(1, 1)
 texture = ExtResource("3_gmdyq")
 metadata/_edit_lock_ = true
 
 [node name="Roue_ArG" type="Sprite2D" parent="Controler"]
 position = Vector2(-70, -90)
-scale = Vector2(1, 1)
 texture = ExtResource("3_gmdyq")
 metadata/_edit_lock_ = true
 
 [node name="Roue_ArD" type="Sprite2D" parent="Controler"]
 position = Vector2(70, -90)
-scale = Vector2(1, 1)
 texture = ExtResource("3_gmdyq")
 metadata/_edit_lock_ = true
+
+[node name="RayCast2D" type="RayCast2D" parent="Controler"]
+position = Vector2(0, -390)
+target_position = Vector2(0, -1000)
