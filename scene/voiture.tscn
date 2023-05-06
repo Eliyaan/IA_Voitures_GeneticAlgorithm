@@ -21,21 +21,25 @@ texture = ExtResource("2_rnmf6")
 metadata/_edit_lock_ = true
 
 [node name="Roue_AvG" type="Sprite2D" parent="Controler"]
+visible = false
 position = Vector2(-70, -310)
 texture = ExtResource("3_gmdyq")
 metadata/_edit_lock_ = true
 
 [node name="Roue_AvD" type="Sprite2D" parent="Controler"]
+visible = false
 position = Vector2(70, -310)
 texture = ExtResource("3_gmdyq")
 metadata/_edit_lock_ = true
 
 [node name="Roue_ArG" type="Sprite2D" parent="Controler"]
+visible = false
 position = Vector2(-70, -90)
 texture = ExtResource("3_gmdyq")
 metadata/_edit_lock_ = true
 
 [node name="Roue_ArD" type="Sprite2D" parent="Controler"]
+visible = false
 position = Vector2(70, -90)
 texture = ExtResource("3_gmdyq")
 metadata/_edit_lock_ = true

@@ -6,15 +6,11 @@ var nn = {
 	#Consts
 	"nb_inputs" = 8,
 	"nb_hidden_layer" = 1,
-	"nb_hidden_neurones" = [4],
+	"nb_hidden_neurones" = [3],
 	"nb_outputs" = 2,
-	"mutation_rate" = 0.3,
 
 	"weights_list" = [[[[]]]],
 	"layers_list"  = [[[]]],  # bias, output(activ)
-
-	"inputs" = [[]], 
-	"excpd_outputs" = [[]], # first : prob for 0 ; sec : prob for 1
 }
 
 func set_rd_wb_values():
@@ -29,7 +25,7 @@ func set_rd_wb_values():
 			nn["layers_list"][i][0][j] = randf_range(-1, 1)
 		
 func sigmoid(value):
-	return 1 / (1 +  2.71828**(-value))
+	return 1 / (1 +  2.718**(-value))
 
 func fprop(inputs):
 	for i in range(nn["layers_list"].size()):
@@ -44,12 +40,6 @@ func fprop(inputs):
 			nactiv += nn["layers_list"][i][0][j]  # Ajout du bias
 			nn["layers_list"][i][1][j] = sigmoid(nactiv)  #activation function
 	return nn["layers_list"][nn["nb_hidden_layer"]][1]
-	
-func reset(): 
-	#reset outputs
-	for i in range(nn["layers_list"].size()):
-		nn["layers_list"][i][1] = []
-		nn["layers_list"][i][1].resize(nn["nb_outputs"] if i == nn["nb_hidden_layer"] else nn["nb_hidden_neurones"][i])			
 		
 func init():
 	#Init empty weights
@@ -88,39 +78,33 @@ func init():
 				nn["layers_list"][i][j].resize(nn["nb_hidden_neurones"][i])
 	set_rd_wb_values()
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	init()
-	alive = true
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func raycast():
+	var nn_array = []
+	for i in range($Controler/Rays.get_child_count()):
+		var ray = $Controler/Rays.get_child(i)
+		ray.force_raycast_update()
+		if ray.is_colliding():
+			nn_array.append(2000 - ray.global_transform.origin.distance_to($Controler/Rays.get_child(i).get_collision_point()))
+		else:
+			nn_array.append(0)
+	return nn_array
+	
 func _process(_delta):
 	if alive and get_parent().get_parent().running:
-		var nn_array = []
-		for i in range($Controler/Rays.get_child_count()):
-			$Controler/Rays.get_child(i).force_raycast_update()
-			if $Controler/Rays.get_child(i).is_colliding():
-				nn_array.append(2000 - $Controler/Rays.get_child(i).global_transform.origin.distance_to($Controler/Rays.get_child(i).get_collision_point()))
-			else:
-				nn_array.append(0)
+		var nn_array = raycast()
 		nn_array.append(deplac.y)
 		var result = think(nn_array)
 		deplac.y -= result[0]*2 - 1
 		if deplac.y > 0: 
 			deplac.y = 0
 		rotation_degrees += (result[1]*2 - 1) * deplac.y * 0.08  # le 0.1 c'est un facteur changeable selon si on veut qu'elle tourne plus vite ou pas
-		var changement = Vector2(deplac.rotated(rotation))
-		position.x += changement.x/10  # le 10 est à quel point la voiture va être ralentie, facteur changeable
-		position.y += changement.y/10 
+		position += deplac.rotated(rotation)/10  # le 10 est à quel point la voiture va être ralentie, facteur changeable
 
 func think(inputs):
-	reset()
 	return fprop(inputs)
 	
 func _on_area_2d_body_entered(body):
-	if "Wall" in body.name:
-		alive = false
-		#hide()
+	alive = false
 
 
 func _on_area_2d_area_entered(area):
