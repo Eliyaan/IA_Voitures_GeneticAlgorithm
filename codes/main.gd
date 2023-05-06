@@ -3,6 +3,7 @@ extends Node2D
 var steps = 0
 var nb_voitures = 210
 var running = false
+var muta = 0.05
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,11 +25,20 @@ func _process(_delta):
 		for voiture in sorted_array:
 			voiture.position = Vector2(-400, 200)
 			voiture.rotation_degrees = 0
-			for i in range(2):
+			for _f in range(2):
 				var car = voitures.instantiate()
 				car.position.x = -400
 				car.position.y = 200
-				car.nn = voiture.nn
+				car.nn = voiture.nn.duplicate(true)
+				#Weights
+				for i in range(car.nn["weights_list"].size()):
+					for j in range(car.nn["weights_list"][i].size()):
+						for k in range(car.nn["weights_list"][i][j].size()):
+							car.nn["weights_list"][i][j][k] += randf_range(-muta, muta)
+				#Biases 
+				for i in range(car.nn["layers_list"].size()):
+					for j in range(car.nn["layers_list"][i][0].size()):
+						car.nn["layers_list"][i][0][j] += randf_range(-muta, muta)
 				$Voitures.add_child(car)
 		for i in range($Voitures.get_child_count()):
 			$Voitures.get_child(i).alive = true
