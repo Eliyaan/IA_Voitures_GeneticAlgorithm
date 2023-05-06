@@ -95,9 +95,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if alive:
+	if alive and get_parent().get_parent().running:
 		var nn_array = []
-		for i in range(len($Controler/Rays.get_children())):
+		for i in range($Controler/Rays.get_child_count()):
 			$Controler/Rays.get_child(i).force_raycast_update()
 			if $Controler/Rays.get_child(i).is_colliding():
 				nn_array.append(2000 - $Controler/Rays.get_child(i).global_transform.origin.distance_to($Controler/Rays.get_child(i).get_collision_point()))
@@ -117,8 +117,13 @@ func think(inputs):
 	reset()
 	return fprop(inputs)
 	
-
-
 func _on_area_2d_body_entered(body):
 	if "Wall" in body.name:
 		alive = false
+		#hide()
+
+
+func _on_area_2d_area_entered(area):
+	if "PointCheckpoint" in area.name:
+		if points%10 == area.get_index()%10:
+			points += 1

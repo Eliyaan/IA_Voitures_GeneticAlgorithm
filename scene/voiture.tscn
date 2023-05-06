@@ -91,4 +91,5 @@ position = Vector2(0, -200)
 scale = Vector2(9.90565, 12.883)
 shape = SubResource("CapsuleShape2D_qrht6")
 
+[connection signal="area_entered" from="Controler/Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Controler/Area2D" to="." method="_on_area_2d_body_entered"]
