@@ -1,8 +1,9 @@
-RayCast2D
 CollisionShape2D
 Area2D
-RigidBody2D
 Node2D
-Camera2D
-Node
 Sprite2D
+Node
+StaticBody2D
+RayCast2D
+RigidBody2D
+Camera2D

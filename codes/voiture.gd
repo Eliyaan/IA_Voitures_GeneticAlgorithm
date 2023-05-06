@@ -1,8 +1,10 @@
 extends Node2D
 var deplac = Vector2(0, 0)
+var alive = false
+var points = 0
 var nn = {
 	#Consts
-	"nb_inputs" = 9,
+	"nb_inputs" = 8,
 	"nb_hidden_layer" = 1,
 	"nb_hidden_neurones" = [4],
 	"nb_outputs" = 2,
@@ -89,22 +91,34 @@ func init():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	init()
+	alive = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	$Controler/RayCast2D.force_raycast_update()
-	if $Controler/RayCast2D.is_colliding():
-		print($Controler/RayCast2D.get_collision_point())
-	var result = think([0.9, 0.1, -1, 0.3, 0.5, 0.4, 0.1, 1.2, -0.8])
-	deplac.y -= result[0]*2 - 1
-	if deplac.y > 0: 
-		deplac.y = 0
-	rotation_degrees += (result[1]*2 - 1) * deplac.y * 0.08  # le 0.1 c'est un facteur changeable selon si on veut qu'elle tourne plus vite ou pas
-	var changement = Vector2(deplac.rotated(rotation))
-	position.x += changement.x/10  # le 10 est à quel point la voiture va être ralentie, facteur changeable
-	position.y += changement.y/10 
+	if alive:
+		var nn_array = []
+		for i in range(len($Controler/Rays.get_children())):
+			$Controler/Rays.get_child(i).force_raycast_update()
+			if $Controler/Rays.get_child(i).is_colliding():
+				nn_array.append(2000 - $Controler/Rays.get_child(i).global_transform.origin.distance_to($Controler/Rays.get_child(i).get_collision_point()))
+			else:
+				nn_array.append(0)
+		nn_array.append(deplac.y)
+		var result = think(nn_array)
+		deplac.y -= result[0]*2 - 1
+		if deplac.y > 0: 
+			deplac.y = 0
+		rotation_degrees += (result[1]*2 - 1) * deplac.y * 0.08  # le 0.1 c'est un facteur changeable selon si on veut qu'elle tourne plus vite ou pas
+		var changement = Vector2(deplac.rotated(rotation))
+		position.x += changement.x/10  # le 10 est à quel point la voiture va être ralentie, facteur changeable
+		position.y += changement.y/10 
 
 func think(inputs):
 	reset()
 	return fprop(inputs)
 	
+
+
+func _on_area_2d_body_entered(body):
+	if "Wall" in body.name:
+		alive = false

@@ -3,7 +3,7 @@ Une voiture rectangle
 
 Réseau de neurone : 
 
-entrée ray casting, vitesse, angle de direction (par rapport à lui même)
+entrée ray casting, vitesse,  (angle de direction (par rapport à lui même)pour plus tard)
 
 sortie accélération/frein (-1/1) et direction = delta angle (entre -1/1)
 
