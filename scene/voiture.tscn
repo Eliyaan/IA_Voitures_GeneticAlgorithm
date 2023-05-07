@@ -1,8 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlbqgeld5mfxf"]
+[gd_scene load_steps=7 format=3 uid="uid://dlbqgeld5mfxf"]
 
 [ext_resource type="Script" path="res://codes/voiture.gd" id="1_ct8nj"]
 [ext_resource type="Texture2D" uid="uid://bn3pwpnpvxttj" path="res://images/Voiture.png" id="2_rnmf6"]
 [ext_resource type="Texture2D" uid="uid://ocwdd7cfxve6" path="res://images/Roue.png" id="3_gmdyq"]
+[ext_resource type="Texture2D" uid="uid://d0abw5e04yr3t" path="res://images/drift.png" id="3_tfrnp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ydn53"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rnmf6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tfrnp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qrht6"]
 radius = 9.08572
@@ -12,15 +27,14 @@ height = 29.4962
 script = ExtResource("1_ct8nj")
 
 [node name="Controler" type="Node2D" parent="."]
-metadata/_edit_lock_ = true
+position = Vector2(0, 6)
 
 [node name="Car" type="Node2D" parent="Controler"]
-scale = Vector2(0.1, 0.0599994)
+scale = Vector2(0.1, 0.0999991)
 
-[node name="Voiture" type="Sprite2D" parent="Controler/Car"]
+[node name="Voiture" type="AnimatedSprite2D" parent="Controler/Car"]
 position = Vector2(0, -200)
-texture = ExtResource("2_rnmf6")
-metadata/_edit_lock_ = true
+sprite_frames = SubResource("SpriteFrames_ydn53")
 
 [node name="Roue_AvG" type="Sprite2D" parent="Controler/Car"]
 visible = false
@@ -54,7 +68,7 @@ scale = Vector2(9.90565, 12.883)
 shape = SubResource("CapsuleShape2D_qrht6")
 
 [node name="Rays" type="Node2D" parent="Controler"]
-position = Vector2(0, 13)
+position = Vector2(0, -3)
 scale = Vector2(10, 10)
 
 [node name="RayFront" type="RayCast2D" parent="Controler/Rays"]
@@ -63,37 +77,37 @@ scale = Vector2(0.1, 0.1)
 target_position = Vector2(0, -300)
 
 [node name="RayLeft30" type="RayCast2D" parent="Controler/Rays"]
-position = Vector2(-0.6, -3.6)
+position = Vector2(-0.600001, -3.5)
 rotation = -0.523599
 scale = Vector2(0.1, 0.1)
 target_position = Vector2(0, -300)
 
 [node name="RayLeft60" type="RayCast2D" parent="Controler/Rays"]
-position = Vector2(-0.899998, -3.2)
+position = Vector2(-0.9, -3)
 rotation = -1.0472
 scale = Vector2(0.1, 0.1)
 target_position = Vector2(0, -300)
 
 [node name="RayLeft90" type="RayCast2D" parent="Controler/Rays"]
-position = Vector2(-1, -2.7)
+position = Vector2(-1, -2.5)
 rotation = -1.5708
 scale = Vector2(0.1, 0.1)
 target_position = Vector2(0, -300)
 
 [node name="RayRight30" type="RayCast2D" parent="Controler/Rays"]
-position = Vector2(0.6, -3.6)
+position = Vector2(0.6, -3.5)
 rotation = 0.523599
 scale = Vector2(0.1, 0.1)
 target_position = Vector2(0, -300)
 
 [node name="RayRight60" type="RayCast2D" parent="Controler/Rays"]
-position = Vector2(0.9, -3.2)
+position = Vector2(0.9, -3)
 rotation = 1.0472
 scale = Vector2(0.1, 0.1)
 target_position = Vector2(0, -300)
 
 [node name="RayRight90" type="RayCast2D" parent="Controler/Rays"]
-position = Vector2(1, -2.7)
+position = Vector2(1, -2.5)
 rotation = 1.5708
 scale = Vector2(0.1, 0.1)
 target_position = Vector2(0, -300)

@@ -2,12 +2,13 @@ extends Node2D
 var deplac = Vector2(0, 0)
 var alive = false
 var points = 0
+var drift = false
 var nn = {
 	#Consts
 	"nb_inputs" = 8,
 	"nb_hidden_layer" = 1,
-	"nb_hidden_neurones" = [3],
-	"nb_outputs" = 2,
+	"nb_hidden_neurones" = [4],
+	"nb_outputs" = 3,
 
 	"weights_list" = [[[[]]]],
 	"layers_list"  = [[[]]],  # bias, output(activ)
@@ -99,6 +100,18 @@ func _process(_delta):
 			deplac.y = 0
 		elif deplac.y < -12:
 			deplac.y = -12
+		if drift:
+			if result[2] >= 0.5:
+				$Controler.position = Vector2(0, 6)
+				position += Vector2(0, 24).rotated(rotation)
+				drift = false
+				$Controler/Car/Voiture.frame = 0
+		else:
+			if result[2] <= 0.5:
+				$Controler.position = Vector2(0, 30)
+				position -= Vector2(0, 24).rotated(rotation)
+				drift = true
+				$Controler/Car/Voiture.frame = 1
 		rotation_degrees += (result[1]*2 - 1) * deplac.y * 0.8  # le 0.8 c'est un facteur changeable selon si on veut qu'elle tourne plus vite ou pas
 		position += deplac.rotated(rotation)
 
