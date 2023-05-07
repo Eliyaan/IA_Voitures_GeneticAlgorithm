@@ -9,91 +9,94 @@ radius = 9.08572
 height = 29.4962
 
 [node name="Voiture" type="Node2D"]
-scale = Vector2(0.1, 0.1)
 script = ExtResource("1_ct8nj")
 
 [node name="Controler" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
 
-[node name="Voiture" type="Sprite2D" parent="Controler"]
+[node name="Car" type="Node2D" parent="Controler"]
+scale = Vector2(0.1, 0.0599994)
+
+[node name="Voiture" type="Sprite2D" parent="Controler/Car"]
 position = Vector2(0, -200)
 texture = ExtResource("2_rnmf6")
 metadata/_edit_lock_ = true
 
-[node name="Roue_AvG" type="Sprite2D" parent="Controler"]
+[node name="Roue_AvG" type="Sprite2D" parent="Controler/Car"]
 visible = false
 position = Vector2(-70, -310)
 texture = ExtResource("3_gmdyq")
 metadata/_edit_lock_ = true
 
-[node name="Roue_AvD" type="Sprite2D" parent="Controler"]
+[node name="Roue_AvD" type="Sprite2D" parent="Controler/Car"]
 visible = false
 position = Vector2(70, -310)
 texture = ExtResource("3_gmdyq")
 metadata/_edit_lock_ = true
 
-[node name="Roue_ArG" type="Sprite2D" parent="Controler"]
+[node name="Roue_ArG" type="Sprite2D" parent="Controler/Car"]
 visible = false
 position = Vector2(-70, -90)
 texture = ExtResource("3_gmdyq")
 metadata/_edit_lock_ = true
 
-[node name="Roue_ArD" type="Sprite2D" parent="Controler"]
+[node name="Roue_ArD" type="Sprite2D" parent="Controler/Car"]
 visible = false
 position = Vector2(70, -90)
 texture = ExtResource("3_gmdyq")
 metadata/_edit_lock_ = true
 
-[node name="Rays" type="Node2D" parent="Controler"]
-scale = Vector2(10, 10)
+[node name="Area2D" type="Area2D" parent="Controler/Car"]
 
-[node name="RayFront" type="RayCast2D" parent="Controler/Rays"]
-position = Vector2(0, -40)
-scale = Vector2(0.1, 0.1)
-target_position = Vector2(0, -2000)
-
-[node name="RayLeft30" type="RayCast2D" parent="Controler/Rays"]
-position = Vector2(-5, -38)
-rotation = -0.523599
-scale = Vector2(0.1, 0.1)
-target_position = Vector2(0, -2000)
-
-[node name="RayLeft60" type="RayCast2D" parent="Controler/Rays"]
-position = Vector2(-9, -34)
-rotation = -1.0472
-scale = Vector2(0.1, 0.1)
-target_position = Vector2(0, -2000)
-
-[node name="RayLeft90" type="RayCast2D" parent="Controler/Rays"]
-position = Vector2(-10, -29)
-rotation = -1.5708
-scale = Vector2(0.1, 0.1)
-target_position = Vector2(0, -2000)
-
-[node name="RayRight30" type="RayCast2D" parent="Controler/Rays"]
-position = Vector2(5, -38)
-rotation = 0.523599
-scale = Vector2(0.1, 0.1)
-target_position = Vector2(0, -2000)
-
-[node name="RayRight60" type="RayCast2D" parent="Controler/Rays"]
-position = Vector2(9, -34)
-rotation = 1.0472
-scale = Vector2(0.1, 0.1)
-target_position = Vector2(0, -2000)
-
-[node name="RayRight90" type="RayCast2D" parent="Controler/Rays"]
-position = Vector2(10, -29)
-rotation = 1.5708
-scale = Vector2(0.1, 0.1)
-target_position = Vector2(0, -2000)
-
-[node name="Area2D" type="Area2D" parent="Controler"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Controler/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Controler/Car/Area2D"]
 position = Vector2(0, -200)
 scale = Vector2(9.90565, 12.883)
 shape = SubResource("CapsuleShape2D_qrht6")
 
-[connection signal="area_entered" from="Controler/Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="body_entered" from="Controler/Area2D" to="." method="_on_area_2d_body_entered"]
+[node name="Rays" type="Node2D" parent="Controler"]
+position = Vector2(0, 13)
+scale = Vector2(10, 10)
+
+[node name="RayFront" type="RayCast2D" parent="Controler/Rays"]
+position = Vector2(0, -3.7)
+scale = Vector2(0.1, 0.1)
+target_position = Vector2(0, -300)
+
+[node name="RayLeft30" type="RayCast2D" parent="Controler/Rays"]
+position = Vector2(-0.6, -3.6)
+rotation = -0.523599
+scale = Vector2(0.1, 0.1)
+target_position = Vector2(0, -300)
+
+[node name="RayLeft60" type="RayCast2D" parent="Controler/Rays"]
+position = Vector2(-0.899998, -3.2)
+rotation = -1.0472
+scale = Vector2(0.1, 0.1)
+target_position = Vector2(0, -300)
+
+[node name="RayLeft90" type="RayCast2D" parent="Controler/Rays"]
+position = Vector2(-1, -2.7)
+rotation = -1.5708
+scale = Vector2(0.1, 0.1)
+target_position = Vector2(0, -300)
+
+[node name="RayRight30" type="RayCast2D" parent="Controler/Rays"]
+position = Vector2(0.6, -3.6)
+rotation = 0.523599
+scale = Vector2(0.1, 0.1)
+target_position = Vector2(0, -300)
+
+[node name="RayRight60" type="RayCast2D" parent="Controler/Rays"]
+position = Vector2(0.9, -3.2)
+rotation = 1.0472
+scale = Vector2(0.1, 0.1)
+target_position = Vector2(0, -300)
+
+[node name="RayRight90" type="RayCast2D" parent="Controler/Rays"]
+position = Vector2(1, -2.7)
+rotation = 1.5708
+scale = Vector2(0.1, 0.1)
+target_position = Vector2(0, -300)
+
+[connection signal="area_entered" from="Controler/Car/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Controler/Car/Area2D" to="." method="_on_area_2d_body_entered"]

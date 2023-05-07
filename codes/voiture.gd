@@ -84,7 +84,7 @@ func raycast():
 		var ray = $Controler/Rays.get_child(i)
 		ray.force_raycast_update()
 		if ray.is_colliding():
-			nn_array.append(2000 - ray.global_transform.origin.distance_to($Controler/Rays.get_child(i).get_collision_point()))
+			nn_array.append(300 - ray.global_transform.origin.distance_to($Controler/Rays.get_child(i).get_collision_point()))
 		else:
 			nn_array.append(0)
 	return nn_array
@@ -94,11 +94,13 @@ func _process(_delta):
 		var nn_array = raycast()
 		nn_array.append(deplac.y)
 		var result = think(nn_array)
-		deplac.y -= result[0]*2 - 1
+		deplac.y -= (result[0]*2 - 1)/2
 		if deplac.y > 0: 
 			deplac.y = 0
-		rotation_degrees += (result[1]*2 - 1) * deplac.y * 0.08  # le 0.1 c'est un facteur changeable selon si on veut qu'elle tourne plus vite ou pas
-		position += deplac.rotated(rotation)/10  # le 10 est à quel point la voiture va être ralentie, facteur changeable
+		elif deplac.y < -12:
+			deplac.y = -12
+		rotation_degrees += (result[1]*2 - 1) * deplac.y * 0.8  # le 0.8 c'est un facteur changeable selon si on veut qu'elle tourne plus vite ou pas
+		position += deplac.rotated(rotation)
 
 func think(inputs):
 	return fprop(inputs)

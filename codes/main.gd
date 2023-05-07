@@ -1,9 +1,10 @@
 extends Node2D
 @export var voitures : PackedScene
 var steps = 0
-var nb_voitures = 210
+var nb_voitures = 200
+var div = 10
 var running = false
-var muta = 0.05
+var muta = 0.5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,13 +20,13 @@ func _process(_delta):
 	if steps > 600:
 		var sorted_array = $Voitures.get_children()
 		sorted_array.sort_custom(custom_sort)
-		for node in sorted_array.slice(70, 210):
-			node.free()
-		sorted_array.resize(70)
+		for i in range($Voitures.get_child_count()-1, nb_voitures/div-1, -1):
+			sorted_array[i].free()
+		sorted_array.resize(nb_voitures/div)
 		for voiture in sorted_array:
 			voiture.position = Vector2(-400, 200)
 			voiture.rotation_degrees = 0
-			for _f in range(2):
+			for _f in range(div):
 				var car = voitures.instantiate()
 				car.position.x = -400
 				car.position.y = 200
