@@ -1,11 +1,11 @@
 extends Node2D
 @export var voitures : PackedScene
-var steps = 0
-var nb_voitures = 200
-var nb_offsprings = 10
-var running = false
-var sim_steps = 300
-var muta = 0.5
+var steps: int = 0
+var nb_voitures: int = 200
+var nb_offsprings: int = 10
+var running: bool = false
+var sim_steps: int = 300
+var muta: float = 0.5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

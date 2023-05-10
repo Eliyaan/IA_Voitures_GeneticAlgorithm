@@ -1,8 +1,8 @@
 extends Node2D
-var deplac = Vector2(0, 0)
-var alive = false
-var points = 0
-var drift = false
+var deplac: Vector2 = Vector2(0, 0)
+var alive: bool = false
+var points: int = 0
+var drift: bool = false
 var nn = {
 	#Consts
 	"nb_inputs" = 6,
