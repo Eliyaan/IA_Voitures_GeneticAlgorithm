@@ -25,10 +25,10 @@ func set_rd_wb_values():
 		for j in range(nn["layers_list"][i][0].size()):
 			nn["layers_list"][i][0][j] = randf_range(-1, 1)
 		
-func sigmoid(value):
+func sigmoid(value: float):
 	return 1 / (1 +  2.718**(-value))
 
-func fprop(inputs):
+func fprop(inputs: Array):
 	for i in range(nn["layers_list"].size()):
 		for j in range(nn["layers_list"][i][0].size()): #the 0 is to get the size of the layer 
 			var nactiv = 0
@@ -90,12 +90,12 @@ func raycast():
 			nn_array.append(0)
 	return nn_array
 	
-func _process(delta):
+func _process(_delta):
 	if alive and get_parent().get_parent().running:
 		var nn_array = raycast()
 		nn_array.append(deplac.y)
-		var result = think(nn_array)
-		deplac.y -= (result[0]*2 - 1)/2
+		var result = fprop(nn_array)
+		deplac.y -= (result[0]*2 - 1)
 		if deplac.y > 0: 
 			deplac.y = 0
 		elif deplac.y < -12:
@@ -115,8 +115,6 @@ func _process(delta):
 		rotation_degrees += (result[1]*2 - 1) * deplac.y * 0.8  # le 0.8 c'est un facteur changeable selon si on veut qu'elle tourne plus vite ou pas
 		position += deplac.rotated(rotation)
 
-func think(inputs):
-	return fprop(inputs)
 	
 #func _on_area_2d_body_entered(_body):
 #	alive = false

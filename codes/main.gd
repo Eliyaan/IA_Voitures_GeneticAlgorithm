@@ -15,7 +15,7 @@ func _ready():
 	running = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if running:
 		steps += 1
 	if steps == sim_steps - 1:
