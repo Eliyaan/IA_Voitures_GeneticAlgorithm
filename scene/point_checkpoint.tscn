@@ -5,6 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gehkw"]
 
 [node name="PointCheckpoint" type="Area2D"]
+monitorable = false
 script = ExtResource("1_dl4vp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
