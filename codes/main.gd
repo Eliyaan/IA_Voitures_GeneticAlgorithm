@@ -14,13 +14,13 @@ func _ready():
 	running = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
+func _physics_process(delta):
 	if running:
 		steps += 1
 	if steps > 600:
 		reset_sim()
 
-func reset_sim():
+func reset_sim():  # 
 	var sorted_array = $Voitures.get_children()
 	sorted_array.sort_custom(custom_sort)  # trier de la meilleure à la pire
 	for i in range($Voitures.get_child_count()-1, nb_voitures/div-1, -1):
@@ -52,7 +52,7 @@ func reset_sim():
 			$Voitures.add_child(car)
 	steps = 0
 		
-func custom_sort(a, b): #high = first
+func custom_sort(a: Node2D, b: Node2D): #high = first
 	return a.points > b.points
 	
 func spawn_voitures():

@@ -100,7 +100,6 @@ scale = Vector2(7.06589, 4.97959)
 [node name="PointCheckpoint10" parent="Points" instance=ExtResource("4_3d8sx")]
 position = Vector2(-404, -116)
 scale = Vector2(7.06589, 4.97959)
-monitorable = false
 
 [node name="PointCheckpoint1" parent="Points" instance=ExtResource("4_3d8sx")]
 position = Vector2(-382, -207)
