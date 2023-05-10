@@ -4,3 +4,4 @@ res://scene/voiture.tscn
 res://scene/wall.tscn
 res://codes/voiture.gd
 res://codes/main.gd
+res://scene/wall.gd
