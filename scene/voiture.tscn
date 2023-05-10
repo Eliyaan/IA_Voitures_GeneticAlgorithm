@@ -60,9 +60,10 @@ position = Vector2(70, -90)
 texture = ExtResource("3_gmdyq")
 metadata/_edit_lock_ = true
 
-[node name="Area2D" type="Area2D" parent="Controler/Car"]
+[node name="VoitureArea" type="Area2D" parent="Controler/Car"]
+monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Controler/Car/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Controler/Car/VoitureArea"]
 position = Vector2(0, -200)
 scale = Vector2(9.90565, 12.883)
 shape = SubResource("CapsuleShape2D_qrht6")
@@ -111,6 +112,3 @@ position = Vector2(1, -2.5)
 rotation = 1.5708
 scale = Vector2(0.1, 0.1)
 target_position = Vector2(0, -300)
-
-[connection signal="area_entered" from="Controler/Car/Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="body_entered" from="Controler/Car/Area2D" to="." method="_on_area_2d_body_entered"]

@@ -118,11 +118,11 @@ func _process(_delta):
 func think(inputs):
 	return fprop(inputs)
 	
-func _on_area_2d_body_entered(_body):
-	alive = false
+#func _on_area_2d_body_entered(_body):
+#	alive = false
 
 
-func _on_area_2d_area_entered(area):
-	if "PointCheckpoint" in area.name:
-		if points%10 == area.get_index()%10:
-			points += 1
+#func _on_area_2d_area_entered(area):
+#	if "PointCheckpoint" in area.name:
+#		if points%10 == area.get_index()%10:
+#			points += 1

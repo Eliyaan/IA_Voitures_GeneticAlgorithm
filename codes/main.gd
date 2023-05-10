@@ -18,33 +18,40 @@ func _process(_delta):
 	if running:
 		steps += 1
 	if steps > 600:
-		var sorted_array = $Voitures.get_children()
-		sorted_array.sort_custom(custom_sort)
-		for i in range($Voitures.get_child_count()-1, nb_voitures/div-1, -1):
-			sorted_array[i].free()
-		sorted_array.resize(nb_voitures/div)
-		for voiture in sorted_array:
-			voiture.position = Vector2(-400, 200)
-			voiture.rotation_degrees = 0
-			for _f in range(div):
-				var car = voitures.instantiate()
-				car.position.x = -400
-				car.position.y = 200
-				car.nn = voiture.nn.duplicate(true)
-				#Weights
-				for i in range(car.nn["weights_list"].size()):
-					for j in range(car.nn["weights_list"][i].size()):
-						for k in range(car.nn["weights_list"][i][j].size()):
-							car.nn["weights_list"][i][j][k] += randf_range(-muta, muta)
-				#Biases 
-				for i in range(car.nn["layers_list"].size()):
-					for j in range(car.nn["layers_list"][i][0].size()):
-						car.nn["layers_list"][i][0][j] += randf_range(-muta, muta)
-				$Voitures.add_child(car)
-		for i in range($Voitures.get_child_count()):
-			$Voitures.get_child(i).alive = true
-		steps = 0
+		reset_sim()
 
+func reset_sim():
+	var sorted_array = $Voitures.get_children()
+	sorted_array.sort_custom(custom_sort)  # trier de la meilleure à la pire
+	for i in range($Voitures.get_child_count()-1, nb_voitures/div-1, -1):
+		sorted_array[i].free()  # enlever toutes les pires
+	sorted_array.resize(nb_voitures/div)
+	var vec = Vector2(-400, 200)
+	var null_vec = Vector2(0, 0)
+	for voiture in sorted_array:
+		voiture.position = vec # reset les voitures sélectionnées
+		voiture.rotation_degrees = 0
+		voiture.alive = true
+		voiture.deplac = null_vec
+		voiture.points = 0
+		for _f in range(div-1):
+			var car = voitures.instantiate()
+			car.position.x = -400
+			car.position.y = 200
+			car.nn = voiture.nn.duplicate(true)
+			car.alive = true
+			#Weights
+			for i in range(car.nn["weights_list"].size()):
+				for j in range(car.nn["weights_list"][i].size()):
+					for k in range(car.nn["weights_list"][i][j].size()):
+						car.nn["weights_list"][i][j][k] += randf_range(-muta, muta)
+			#Biases 
+			for i in range(car.nn["layers_list"].size()):
+				for j in range(car.nn["layers_list"][i][0].size()):
+					car.nn["layers_list"][i][0][j] += randf_range(-muta, muta)
+			$Voitures.add_child(car)
+	steps = 0
+		
 func custom_sort(a, b): #high = first
 	return a.points > b.points
 	
@@ -54,3 +61,4 @@ func spawn_voitures():
 	car.init()
 	car.alive = true
 	$Voitures.add_child(car)
+

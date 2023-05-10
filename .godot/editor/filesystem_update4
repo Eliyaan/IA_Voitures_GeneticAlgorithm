@@ -1,5 +1,7 @@
-res://scene/voiture.tscn
-res://codes/voiture.gd
 res://scene/main.tscn
+res://scene/point_checkpoint.gd
+res://scene/voiture.tscn
 res://scene/wall.tscn
 res://scene/point_checkpoint.tscn
+res://codes/voiture.gd
+res://scene/wall.gd
