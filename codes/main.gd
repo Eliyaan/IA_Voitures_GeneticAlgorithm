@@ -2,8 +2,9 @@ extends Node2D
 @export var voitures : PackedScene
 var steps = 0
 var nb_voitures = 200
-var div = 10
+var nb_offsprings = 10
 var running = false
+var sim_steps = 300
 var muta = 0.5
 
 # Called when the node enters the scene tree for the first time.
@@ -14,33 +15,39 @@ func _ready():
 	running = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _process(delta):
 	if running:
 		steps += 1
-	if steps > 600:
+	if steps == sim_steps - 1:
+		var vec = Vector2(-400, 200)
+		var null_vec = Vector2(0, 0)
+		var sorted_array = $Voitures.get_children()
+		for voiture in sorted_array:
+			voiture.alive = false
+			voiture.rotation_degrees = 0
+			voiture.deplac = null_vec
+			voiture.show()
+			voiture.position = vec 
+	elif steps == sim_steps:
 		reset_sim()
-
+	elif steps == sim_steps + 1:
+		var sorted_array = $Voitures.get_children()
+		for voiture in sorted_array:
+			if voiture.deplac != Vector2(0, 0):
+				print(voiture.position)
+			voiture.alive = true
+		steps = 0
+		
 func reset_sim():  # 
 	var sorted_array = $Voitures.get_children()
 	sorted_array.sort_custom(custom_sort)  # trier de la meilleure à la pire
-	var vec = Vector2(-400, 200)
-	var null_vec = Vector2(0, 0)
-	for nb in range(div):
+	for nb in range(nb_offsprings):
 		var voiture = sorted_array[nb]
-		voiture.position = vec # reset les voitures sélectionnées
-		voiture.rotation_degrees = 0
-		voiture.alive = true
-		voiture.deplac = null_vec
 		voiture.points = 0
-		for f in range(nb_voitures/div-1):
-			var car = sorted_array[(nb+1)*div+f-(1*nb)]
-			car.position = vec
-			car.rotation_degrees = 0
-			car.alive = true
-			car.deplac = null_vec
-			car.points = 0
+		for f in range(nb_voitures/nb_offsprings-1):
+			var car = sorted_array[nb*(nb_voitures/nb_offsprings)+f-nb+nb_offsprings]
 			car.nn = voiture.nn.duplicate(true)
-			car.show()
+			car.points = 0
 			#Weights
 			for i in range(car.nn["weights_list"].size()):
 				for j in range(car.nn["weights_list"][i].size()):
@@ -50,7 +57,6 @@ func reset_sim():  #
 			for i in range(car.nn["layers_list"].size()):
 				for j in range(car.nn["layers_list"][i][0].size()):
 					car.nn["layers_list"][i][0][j] += randf_range(-muta, muta)
-	steps = 0
 		
 func custom_sort(a: Node2D, b: Node2D): #high = first
 	return a.points > b.points

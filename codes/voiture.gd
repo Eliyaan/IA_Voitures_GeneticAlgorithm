@@ -90,7 +90,7 @@ func raycast():
 			nn_array.append(0)
 	return nn_array
 	
-func _physics_process(delta):
+func _process(delta):
 	if alive and get_parent().get_parent().running:
 		var nn_array = raycast()
 		nn_array.append(deplac.y)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dlbqgeld5mfxf"]
 
 [ext_resource type="Script" path="res://codes/voiture.gd" id="1_ct8nj"]
-[ext_resource type="Texture2D" uid="uid://b384bdy8m3bpd" path="res://images/best_car.png" id="4_ep3mt"]
+[ext_resource type="Texture2D" path="res://images/best_car.png" id="4_ep3mt"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ydn53"]
 animations = [{
