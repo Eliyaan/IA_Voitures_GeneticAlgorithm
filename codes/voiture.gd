@@ -3,6 +3,8 @@ var deplac: Vector2 = Vector2(0, 0)
 var alive: bool = false
 var points: int = 0
 var drift: bool = false
+var rota_array: Array = []
+var rays_querries: Array = []
 var nn = {
 	#Consts
 	"nb_inputs" = 6,
@@ -80,14 +82,18 @@ func init():
 				nn["layers_list"][i][j].resize(nn["nb_hidden_neurones"][i])
 	set_rd_wb_values()
 
+func _ready():
+	for n in range(5):
+		rota_array.append(deg_to_rad(n*45 - 90))
+		rays_querries.append(PhysicsRayQueryParameters2D.create(global_position, global_position, 0b10))
+
 func raycast():
 	var nn_array = []
 	var space_state = get_world_2d().direct_space_state
-	var query
-	var result
 	for n in range(5):
-		query = PhysicsRayQueryParameters2D.create(global_position, global_position + Vector2(0, -300).rotated(n*45 - 90), 0b10)
-		result = space_state.intersect_ray(query)  # coords of touch = result.position
+		rays_querries[n].set_to(global_position + Vector2(0, -300).rotated(rota_array[n] + rotation))
+		rays_querries[n].set_from(global_position)
+		var result = space_state.intersect_ray(rays_querries[n])  # coords of touch = result.position
 		if result:
 			nn_array.append(300 - global_transform.origin.distance_to(result.position))
 		else:
@@ -106,16 +112,16 @@ func _process(_delta):
 			deplac.y = -12
 		if drift:
 			if result[2] >= 0.5:
-				$Controler.position = Vector2(0, 6)
+				$Car.position = Vector2(0, 6)
 				position += Vector2(0, 24).rotated(rotation)
 				drift = false
-				#$Controler/Car/Voiture.frame = 0
+				#$Car/Car/Voiture.frame = 0
 		else:
 			if result[2] <= 0.5:
-				$Controler.position = Vector2(0, 30)
+				$Car.position = Vector2(0, 30)
 				position -= Vector2(0, 24).rotated(rotation)
 				drift = true
-				#$Controler/Car/Voiture.frame = 1
+				#$Car/Car/Voiture.frame = 1
 		rotation_degrees += (result[1]*2 - 1) * deplac.y * 0.8  # le 0.8 c'est un facteur changeable selon si on veut qu'elle tourne plus vite ou pas
 		position += deplac.rotated(rotation)
 

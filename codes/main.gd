@@ -1,12 +1,12 @@
 extends Node2D
 @export var voitures : PackedScene
 var steps: int = 0
-var nb_voitures: int = 200
-var nb_offsprings: int = 10
+var nb_voitures: int = 100
+var nb_offsprings: int = 20
 var running: bool = false
 var sim_steps: int = 300
 var muta: float = 0.5
-var recovery_frames: int = 5
+var recovery_frames: int = 1
 var sorted_array: Array = []
 
 # Called when the node enters the scene tree for the first time.
