@@ -14,8 +14,8 @@ voitures = ExtResource("2_qud33")
 [node name="Terrain" type="Node2D" parent="."]
 
 [node name="Wall" parent="Terrain" instance=ExtResource("3_x67t4")]
-position = Vector2(-530, -92)
-scale = Vector2(5.16179, 54.1487)
+position = Vector2(-530, 0.999992)
+scale = Vector2(5.16179, 41.5887)
 
 [node name="Wall4" parent="Terrain" instance=ExtResource("3_x67t4")]
 position = Vector2(525, -30)

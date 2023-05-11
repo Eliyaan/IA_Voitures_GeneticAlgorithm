@@ -6,6 +6,8 @@ var nb_offsprings: int = 10
 var running: bool = false
 var sim_steps: int = 300
 var muta: float = 0.5
+var recovery_frames: int = 5
+var sorted_array: Array = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,27 +23,24 @@ func _process(_delta):
 	if steps == sim_steps - 1:
 		var vec = Vector2(-400, 200)
 		var null_vec = Vector2(0, 0)
-		var sorted_array = $Voitures.get_children()
+		sorted_array = $Voitures.get_children()
 		for voiture in sorted_array:
 			voiture.alive = false
 			voiture.rotation_degrees = 0
 			voiture.deplac = null_vec
 			voiture.show()
 			voiture.position = vec 
-	elif steps == sim_steps:
-		reset_sim()
-	elif steps == sim_steps + 1:
-		var sorted_array = $Voitures.get_children()
+		sorted_array.sort_custom(custom_sort)  # trier de la meilleure à la pire
+	elif steps >= sim_steps and steps < sim_steps + recovery_frames:
+		reset_sim(steps-sim_steps)
+	elif steps == sim_steps + recovery_frames +1:
+		assert($Voitures.get_child_count() == nb_voitures)
 		for voiture in sorted_array:
-			if voiture.deplac != Vector2(0, 0):
-				print(voiture.position)
 			voiture.alive = true
 		steps = 0
 		
-func reset_sim():  # 
-	var sorted_array = $Voitures.get_children()
-	sorted_array.sort_custom(custom_sort)  # trier de la meilleure à la pire
-	for nb in range(nb_offsprings):
+func reset_sim(frame: int):  # 
+	for nb in range(nb_offsprings/recovery_frames * frame, (nb_offsprings/recovery_frames) * frame + nb_offsprings/recovery_frames):
 		var voiture = sorted_array[nb]
 		voiture.points = 0
 		for f in range(nb_voitures/nb_offsprings-1):

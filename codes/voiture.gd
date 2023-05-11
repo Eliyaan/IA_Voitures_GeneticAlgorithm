@@ -29,9 +29,10 @@ func sigmoid(value: float):
 	return 1 / (1 +  2.718**(-value))
 
 func fprop(inputs: Array):
+	var nactiv = 0
 	for i in range(nn["layers_list"].size()):
 		for j in range(nn["layers_list"][i][0].size()): #the 0 is to get the size of the layer 
-			var nactiv = 0
+			nactiv = 0
 			if i == 0:
 				for k in range(inputs.size()):  # Pour chaque input
 					nactiv += nn["weights_list"][i][j][k] * inputs[k] #Le bon weight fois le bon input
