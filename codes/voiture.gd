@@ -5,6 +5,7 @@ var points: int = 0
 var drift: bool = false
 var rota_array: Array = []
 var rays_querries: Array = []
+var space_state
 var nn = {
 	#Consts
 	"nb_inputs" = 6,
@@ -83,13 +84,13 @@ func init():
 	set_rd_wb_values()
 
 func _ready():
+	space_state = get_world_2d().direct_space_state
 	for n in range(5):
 		rota_array.append(deg_to_rad(n*45 - 90))
 		rays_querries.append(PhysicsRayQueryParameters2D.create(global_position, global_position, 0b10))
 
 func raycast():
 	var nn_array = []
-	var space_state = get_world_2d().direct_space_state
 	for n in range(5):
 		rays_querries[n].set_to(global_position + Vector2(0, -300).rotated(rota_array[n] + rotation))
 		rays_querries[n].set_from(global_position)
