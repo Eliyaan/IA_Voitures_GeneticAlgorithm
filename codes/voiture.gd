@@ -82,11 +82,14 @@ func init():
 
 func raycast():
 	var nn_array = []
-	for i in range($Controler/Rays.get_child_count()):
-		var ray = $Controler/Rays.get_child(i)
-		ray.force_raycast_update()
-		if ray.is_colliding():
-			nn_array.append(300 - ray.global_transform.origin.distance_to($Controler/Rays.get_child(i).get_collision_point()))
+	var space_state = get_world_2d().direct_space_state
+	var query
+	var result
+	for n in range(5):
+		query = PhysicsRayQueryParameters2D.create(global_position, global_position + Vector2(0, -300).rotated(n*45 - 90), 0b10)
+		result = space_state.intersect_ray(query)  # coords of touch = result.position
+		if result:
+			nn_array.append(300 - global_transform.origin.distance_to(result.position))
 		else:
 			nn_array.append(0)
 	return nn_array
