@@ -8,22 +8,33 @@ var sim_steps: int = 300
 var muta: float = 0.5
 var recovery_frames: int = 1
 var sorted_array: Array = []
+var thread
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#Gen voitures
-	for _voiture in range(0, nb_voitures):
-		spawn_voitures()
+	thread = Thread.new()
+	spawn_voitures()
+	sorted_array = $Voitures.get_children()
 	running = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if running:
 		steps += 1
+		thread.start(run_cars, 0)
+		
+		for nb in range(150, nb_voitures):
+			var car = sorted_array[nb]
+			if car.alive and running:
+				car.frame()
+		
+		thread.wait_to_finish()
+		
+	# Reset the sim
 	if steps == sim_steps - 1:
 		var vec = Vector2(-400, 200)
 		var null_vec = Vector2(0, 0)
-		sorted_array = $Voitures.get_children()
 		for voiture in sorted_array:
 			voiture.alive = false
 			voiture.rotation_degrees = 0
@@ -38,6 +49,14 @@ func _process(_delta):
 		for voiture in sorted_array:
 			voiture.alive = true
 		steps = 0
+	
+	
+func run_cars():
+	for nb in range(150):
+		var car = sorted_array[nb]
+		if car.alive and running:
+			car.frame()
+	
 		
 func reset_sim(frame: int):  # 
 	for nb in range(nb_offsprings/recovery_frames * frame, (nb_offsprings/recovery_frames) * frame + nb_offsprings/recovery_frames):
@@ -61,9 +80,10 @@ func custom_sort(a: Node2D, b: Node2D): #high = first
 	return a.points > b.points
 	
 func spawn_voitures():
-	var car = voitures.instantiate()
-	car.position = Vector2(-400, 200)
-	car.init()
-	car.alive = true
-	$Voitures.add_child(car)
+	for _i in range(nb_voitures):
+		var car = voitures.instantiate()
+		car.position = Vector2(-400, 200)
+		car.init()
+		car.alive = true
+		$Voitures.add_child(car)
 
