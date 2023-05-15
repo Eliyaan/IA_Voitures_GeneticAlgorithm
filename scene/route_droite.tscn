@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://1aemq3278bcj"]
+
+[ext_resource type="PackedScene" uid="uid://b12qt4hobwfh5" path="res://scene/wall.tscn" id="1_hnxjl"]
+
+[node name="Route-Droite" type="Node2D"]
+
+[node name="Wall_Haut" parent="." instance=ExtResource("1_hnxjl")]
+position = Vector2(0, -100)
+scale = Vector2(10, 1)
+
+[node name="Wall_Bas" parent="." instance=ExtResource("1_hnxjl")]
+position = Vector2(0, 100)
+scale = Vector2(10, 1)

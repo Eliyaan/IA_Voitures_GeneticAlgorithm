@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnj3av7e4gyhu"]
+
+[ext_resource type="Script" path="res://codes/route_tourne.gd" id="1_iuub8"]
+[ext_resource type="PackedScene" uid="uid://b12qt4hobwfh5" path="res://scene/wall.tscn" id="2_k1vqm"]
+
+[node name="Route-Tourne" type="Node2D"]
+script = ExtResource("1_iuub8")
+wall = ExtResource("2_k1vqm")

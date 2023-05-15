@@ -1,5 +1,6 @@
 extends Node2D
 @export var voitures : PackedScene
+@export var circuit_tourne : PackedScene
 var steps: int = 0
 var nb_voitures: int = 300
 var nb_offsprings: int = 20
@@ -66,4 +67,10 @@ func spawn_voitures():
 	car.init()
 	car.alive = true
 	$Voitures.add_child(car)
+	
+func spawn(x, y):
+	var route = circuit_tourne.instantiate()
+	route.x = x
+	route.y = y
+	$Terrain.add_child(route)
 
