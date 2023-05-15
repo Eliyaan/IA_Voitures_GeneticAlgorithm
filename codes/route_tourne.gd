@@ -2,7 +2,7 @@ extends Node2D
 @export var wall : PackedScene
 var rota = 0
 var aj = -90
-var espacement = 200
+var espacement = 10
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

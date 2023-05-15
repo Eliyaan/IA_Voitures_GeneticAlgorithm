@@ -10,6 +10,10 @@ var sim_steps: int = 300
 var muta: float = 0.5
 var recovery_frames: int = 1
 var sorted_array: Array = []
+var espacement = 200
+var pos_next_x = 0
+var pos_next_y = 0
+var angle	= 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -70,11 +74,28 @@ func spawn_voitures():
 	car.alive = true
 	$Voitures.add_child(car)
 	
+
+func spawn_circuit(num):
+	if num == 1:
+		rand_droite()
+		rand_tourne()
+
+func rand_droite():
+	var taille = randi_range(100, 200)
+	spawn_droit(pos_next_x, pos_next_y, taille)
+	pos_next_x = taille
+	taille = 0
+
+func rand_tourne():
+	angle += randi_range(-80, 80)
+	spawn_tourne(pos_next_x, pos_next_y, angle)
+	
 func spawn_tourne(pos_x, pos_y, angle):
 	var route = circuit_tourne.instantiate()
 	route.position.x = pos_x
 	route.position.y = pos_y
 	route.rota += angle
+	route.espacement = espacement
 	$Terrain.add_child(route)
 	
 func spawn_droit(pos_x, pos_y, long):
@@ -82,8 +103,5 @@ func spawn_droit(pos_x, pos_y, long):
 	route.position.x = pos_x
 	route.position.y = pos_y
 	route.longueur = long
+	route.espacement = espacement 
 	$Terrain.add_child(route)
-
-func spawn_circuit(num):
-	if num == 1:
-		spawn_tourne(0, 0, 120)
