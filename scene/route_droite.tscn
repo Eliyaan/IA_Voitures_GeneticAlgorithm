@@ -1,13 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://1aemq3278bcj"]
+[gd_scene load_steps=3 format=3 uid="uid://1aemq3278bcj"]
 
 [ext_resource type="PackedScene" uid="uid://b12qt4hobwfh5" path="res://scene/wall.tscn" id="1_hnxjl"]
+[ext_resource type="Script" path="res://codes/route_droite.gd" id="1_orwpm"]
 
 [node name="Route-Droite" type="Node2D"]
-
-[node name="Wall_Haut" parent="." instance=ExtResource("1_hnxjl")]
-position = Vector2(0, -100)
-scale = Vector2(10, 1)
-
-[node name="Wall_Bas" parent="." instance=ExtResource("1_hnxjl")]
-position = Vector2(0, 100)
-scale = Vector2(10, 1)
+script = ExtResource("1_orwpm")
+wall = ExtResource("1_hnxjl")

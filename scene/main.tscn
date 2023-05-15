@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://g81eg0hrr6ud"]
+[gd_scene load_steps=5 format=3 uid="uid://g81eg0hrr6ud"]
 
 [ext_resource type="Script" path="res://codes/main.gd" id="1_c5d5b"]
 [ext_resource type="PackedScene" uid="uid://dlbqgeld5mfxf" path="res://scene/voiture.tscn" id="2_qud33"]
 [ext_resource type="PackedScene" uid="uid://cnj3av7e4gyhu" path="res://scene/route_tourne.tscn" id="3_a0amj"]
+[ext_resource type="PackedScene" uid="uid://1aemq3278bcj" path="res://scene/route_droite.tscn" id="4_l4rpw"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_c5d5b")
 voitures = ExtResource("2_qud33")
 circuit_tourne = ExtResource("3_a0amj")
+circuit_droit = ExtResource("4_l4rpw")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

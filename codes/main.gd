@@ -1,8 +1,9 @@
 extends Node2D
-@export var voitures : PackedScene
-@export var circuit_tourne : PackedScene
+@export var voitures 		: PackedScene
+@export var circuit_tourne	: PackedScene
+@export var circuit_droit	: PackedScene
 var steps: int = 0
-var nb_voitures: int = 0
+var nb_voitures: int = 1
 var nb_offsprings: int = 20
 var running: bool = false
 var sim_steps: int = 300
@@ -16,7 +17,7 @@ func _ready():
 	for _voiture in range(0, nb_voitures):
 		spawn_voitures()
 	running = true
-	spawn(0, 0, 10)
+	spawn_circuit(1)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -69,10 +70,20 @@ func spawn_voitures():
 	car.alive = true
 	$Voitures.add_child(car)
 	
-func spawn(pos_x, pos_y, angle):
+func spawn_tourne(pos_x, pos_y, angle):
 	var route = circuit_tourne.instantiate()
-	route.x = pos_x
-	route.y = pos_y
-	route.rota = angle
+	route.position.x = pos_x
+	route.position.y = pos_y
+	route.rota += angle
+	$Terrain.add_child(route)
+	
+func spawn_droit(pos_x, pos_y, long):
+	var route = circuit_droit.instantiate()
+	route.position.x = pos_x
+	route.position.y = pos_y
+	route.longueur = long
 	$Terrain.add_child(route)
 
+func spawn_circuit(num):
+	if num == 1:
+		spawn_tourne(0, 0, 120)
