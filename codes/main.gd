@@ -11,9 +11,8 @@ var muta: float = 0.5
 var recovery_frames: int = 1
 var sorted_array: Array = []
 var espacement = 200
-var pos_next_x = 0
-var pos_next_y = 0
-var angle	= 0
+var next_angle	= 0
+var next_pos	= Vector2(0, 0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -77,31 +76,33 @@ func spawn_voitures():
 
 func spawn_circuit(num):
 	if num == 1:
-		rand_droite()
-		rand_tourne()
+		spawn_droit(200)
+		spawn_tourne(90)
 
-func rand_droite():
-	var taille = randi_range(100, 200)
-	spawn_droit(pos_next_x, pos_next_y, taille)
-	pos_next_x = taille
-	taille = 0
-
-func rand_tourne():
-	angle += randi_range(-80, 80)
-	spawn_tourne(pos_next_x, pos_next_y, angle)
-	
-func spawn_tourne(pos_x, pos_y, angle):
+func spawn_tourne(angle):
 	var route = circuit_tourne.instantiate()
-	route.position.x = pos_x
-	route.position.y = pos_y
-	route.rota += angle
+	route.position = next_pos
 	route.espacement = espacement
+	route.rota += angle
 	$Terrain.add_child(route)
+	maj(angle)
 	
-func spawn_droit(pos_x, pos_y, long):
+func spawn_droit(long):
 	var route = circuit_droit.instantiate()
-	route.position.x = pos_x
-	route.position.y = pos_y
+	route.position = next_pos
+	route.rotation = next_angle
 	route.longueur = long
 	route.espacement = espacement 
 	$Terrain.add_child(route)
+	maj(0)
+	
+func maj(angle):
+	if $Terrain.get_child($Terrain.get_child_count()-1).name == "Route_Droite":
+		var pos = $Terrain.get_child($Terrain.get_child_count()-1).position
+		next_pos = pos + (pos - next_pos)
+	elif $Terrain.get_child($Terrain.get_child_count()-1).name == "Route_Tourne":
+		var pos_mid = $Terrain.get_child(-1).get_child(0).position
+		var pos_end = $Terrain.get_child(-1).get_child(-1).position
+		next_pos = (pos_mid + pos_end)/2.0
+		next_angle += angle
+	print(next_pos)

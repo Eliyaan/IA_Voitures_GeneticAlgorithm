@@ -1,9 +1,9 @@
 res://scene/main.tscn
-res://codes/main.gd
-res://codes/route_droite.gd
 res://codes/route_tourne.gd
 res://scene/voiture.tscn
 res://scene/wall.tscn
 res://scene/point_checkpoint.tscn
 res://scene/route_droite.tscn
 res://scene/route_tourne.tscn
+res://codes/main.gd
+res://codes/route_droite.gd
