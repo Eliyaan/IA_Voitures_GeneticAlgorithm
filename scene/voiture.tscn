@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlbqgeld5mfxf"]
+[gd_scene load_steps=6 format=3 uid="uid://dlbqgeld5mfxf"]
 
 [ext_resource type="Script" path="res://codes/voiture.gd" id="1_ct8nj"]
+[ext_resource type="Texture2D" uid="uid://dnb8l2gugwpti" path="res://images/best_car_brake.png" id="3_ivud7"]
 [ext_resource type="Texture2D" uid="uid://b384bdy8m3bpd" path="res://images/best_car.png" id="4_ep3mt"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ydn53"]
@@ -8,6 +9,9 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("4_ep3mt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ivud7")
 }],
 "loop": true,
 "name": &"new_animation",
@@ -25,10 +29,11 @@ position = Vector2(0, 6)
 scale = Vector2(0.1, 0.0999991)
 
 [node name="Voiture" type="AnimatedSprite2D" parent="Car"]
-position = Vector2(9.53674e-07, -210.002)
-scale = Vector2(5.75, 5.75)
+position = Vector2(0, -191.32)
+scale = Vector2(4.65278, 3.8264)
 sprite_frames = SubResource("SpriteFrames_ydn53")
 animation = &"new_animation"
+frame_progress = 0.658432
 
 [node name="VoitureArea" type="Area2D" parent="Car"]
 collision_mask = 0
