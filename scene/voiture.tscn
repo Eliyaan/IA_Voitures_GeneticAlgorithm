@@ -25,8 +25,8 @@ position = Vector2(0, 6)
 scale = Vector2(0.1, 0.0999991)
 
 [node name="Voiture" type="AnimatedSprite2D" parent="Car"]
-position = Vector2(9.53674e-07, -210.002)
-scale = Vector2(5.75, 5.75)
+position = Vector2(0, -191.32)
+scale = Vector2(4.65278, 3.8264)
 sprite_frames = SubResource("SpriteFrames_ydn53")
 animation = &"new_animation"
 

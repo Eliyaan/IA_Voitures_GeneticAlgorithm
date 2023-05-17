@@ -1,13 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://g81eg0hrr6ud"]
+[gd_scene load_steps=6 format=3 uid="uid://g81eg0hrr6ud"]
 
 [ext_resource type="Script" path="res://codes/main.gd" id="1_c5d5b"]
 [ext_resource type="PackedScene" uid="uid://dlbqgeld5mfxf" path="res://scene/voiture.tscn" id="2_qud33"]
+[ext_resource type="Texture2D" uid="uid://bp7gwt5ka12fp" path="res://images/wall.png" id="3_fnaab"]
 [ext_resource type="PackedScene" uid="uid://b12qt4hobwfh5" path="res://scene/wall.tscn" id="3_x67t4"]
 [ext_resource type="PackedScene" uid="uid://mmn38yo4lrnn" path="res://scene/point_checkpoint.tscn" id="4_3d8sx"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_c5d5b")
 voitures = ExtResource("2_qud33")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(55, -2.5)
+scale = Vector2(74.3, 52.55)
+texture = ExtResource("3_fnaab")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
