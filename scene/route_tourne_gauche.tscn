@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://btdt48prftaiw"]
 
 [ext_resource type="Script" path="res://codes/route_tourne_gauche.gd" id="1_hkcma"]
-[ext_resource type="PackedScene" uid="uid://b12qt4hobwfh5" path="res://scene/wall.tscn" id="2_b8kla"]
+[ext_resource type="PackedScene" path="res://scene/wall.tscn" id="2_b8kla"]
 
 [node name="Route_tourne_gauche" type="Node2D"]
 script = ExtResource("1_hkcma")

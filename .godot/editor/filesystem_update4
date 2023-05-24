@@ -5,3 +5,4 @@ res://scene/route_tourne_droite.tscn
 res://scene/main.tscn
 res://codes/main.gd
 res://scene/route_tourne.tscn
+res://scene/route_droite.tscn

@@ -16,8 +16,7 @@ func _process(_delta):
 func crea(angle):
 	var mur = wall.instantiate()
 	if angle == 0 :
-		mur.position.x = 0
-		mur.position.y = 0
+		mur.position = Vector2(0, 0)
 		add_child(mur)
 		crea(1)
 	else:
