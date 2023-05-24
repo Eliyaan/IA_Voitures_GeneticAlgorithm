@@ -1,7 +1,8 @@
 extends Node2D
-@export var voitures 		: PackedScene
-@export var circuit_tourne	: PackedScene
-@export var circuit_droit	: PackedScene
+@export var voitures 			: PackedScene
+@export var circuit_tourne_gauche	: PackedScene
+@export var circuit_tourne_droite	: PackedScene
+@export var circuit_droit		: PackedScene
 var steps: int = 0
 var nb_voitures: int = 1
 var nb_offsprings: int = 20
@@ -76,12 +77,18 @@ func spawn_voitures():
 
 func spawn_circuit(num):
 	if num == 1:
-		spawn_droit(200)
+		spawn_droit(300)
 		spawn_tourne(90)
+		spawn_droit(300)
 
 func spawn_tourne(angle):
-	var route = circuit_tourne.instantiate()
-	route.position = next_pos
+	var route
+	if 	angle < 0:
+		route = circuit_tourne_gauche.instantiate()
+		route.position = next_pos+Vector2(0, espacement/2).rotated(next_angle)
+	elif angle > 0:
+		route = circuit_tourne_droite.instantiate()
+		route.position = next_pos+Vector2(0, espacement/2).rotated(next_angle)
 	route.espacement = espacement
 	route.rota += angle
 	$Terrain.add_child(route)
@@ -94,15 +101,21 @@ func spawn_droit(long):
 	route.longueur = long
 	route.espacement = espacement 
 	$Terrain.add_child(route)
-	maj(0)
+	maj(long)
 	
-func maj(angle):
+func maj(modif):
 	if $Terrain.get_child($Terrain.get_child_count()-1).name == "Route_Droite":
 		var pos = $Terrain.get_child($Terrain.get_child_count()-1).position
-		next_pos = pos + (pos - next_pos)
-	elif $Terrain.get_child($Terrain.get_child_count()-1).name == "Route_Tourne":
+		next_pos = pos + Vector2(modif, 0).rotated(next_angle)
+	elif $Terrain.get_child($Terrain.get_child_count()-1).name == "Route_tourne_droite":
 		var pos_mid = $Terrain.get_child(-1).get_child(0).position
 		var pos_end = $Terrain.get_child(-1).get_child(-1).position
 		next_pos = (pos_mid + pos_end)/2.0
-		next_angle += angle
+		next_angle += modif
+	elif $Terrain.get_child($Terrain.get_child_count()-1).name == "Route_tourne_gauche":
+		var pos_mid = $Terrain.get_child(-1).get_child(0).position
+		var pos_end = $Terrain.get_child(-1).get_child(-1).position
+		next_pos = (pos_mid + pos_end)/2.0
+		next_angle -= modif
 	print(next_pos)
+	print(next_angle)
