@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://hgt1u3301483"]
+
+[ext_resource type="PackedScene" path="res://scene/wall.tscn" id="1_hnxjl"]
+[ext_resource type="Script" path="res://codes/route_droite.gd" id="1_orwpm"]
+
+[node name="Route_Droite" type="Node2D"]
+script = ExtResource("1_orwpm")
+wall = ExtResource("1_hnxjl")
