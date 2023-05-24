@@ -18,3 +18,4 @@ circuit_droit = ExtResource("4_l4rpw")
 [node name="Voitures" type="Node" parent="."]
 
 [node name="Terrain" type="Node2D" parent="."]
+scale = Vector2(0.5, 0.5)

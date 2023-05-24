@@ -78,8 +78,8 @@ func spawn_voitures():
 func spawn_circuit(num):
 	if num == 1:
 		for nb in range(0, 4):
-			spawn_droit(200)
-			spawn_tourne(90)
+			spawn_droit(300)
+			spawn_tourne(PI/3)
 
 func spawn_tourne(angle):
 	var route
@@ -91,14 +91,14 @@ func spawn_tourne(angle):
 		route.position = next_pos+Vector2(0, espacement/2).rotated(next_angle)
 	route.espacement = espacement
 	route.rota += angle
-	route.rotation = deg_to_rad(next_angle)
+	route.rotation = next_angle
 	$Terrain.add_child(route)
 	maj(angle)
 	
 func spawn_droit(long):
 	var route = circuit_droit.instantiate()
 	route.position = next_pos
-	route.rotation = deg_to_rad(next_angle)
+	route.rotation = next_angle
 	route.longueur = long
 	route.espacement = espacement 
 	$Terrain.add_child(route)
@@ -107,9 +107,11 @@ func spawn_droit(long):
 func maj(modif):
 	if "Route_Droite" in $Terrain.get_child(-1).name:
 		var pos = $Terrain.get_child($Terrain.get_child_count()-1).position
-		next_pos = pos + Vector2(modif, 0).rotated(deg_to_rad(next_angle))
+		print(next_angle)
+		print(Vector2(modif, 0).rotated(next_angle))
+		next_pos = pos + Vector2(modif, 0).rotated(next_angle)
 	elif "Route_tourne_droite" in $Terrain.get_child(-1).name or "Route_tourne_gauche" in $Terrain.get_child(-1).name:
-		var pos_end = Vector2(cos(deg_to_rad(modif+next_angle-90))*espacement, sin(deg_to_rad(modif+next_angle-90))*espacement)
+		var pos_end = Vector2(cos((modif+next_angle-PI/2))*espacement, sin(modif+next_angle-PI/2)*espacement)
 		next_pos = (Vector2(0,0)+pos_end)/2+$Terrain.get_child(-1).position
 		next_angle += modif
 	else:
