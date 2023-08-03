@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://codes/main.gd" id="1_c5d5b"]
 [ext_resource type="PackedScene" uid="uid://dlbqgeld5mfxf" path="res://scene/voiture.tscn" id="2_qud33"]
-[ext_resource type="Texture2D" path="res://images/bkgrnd.png" id="3_02h1f"]
-[ext_resource type="PackedScene" path="res://scene/wall.tscn" id="3_x67t4"]
-[ext_resource type="PackedScene" path="res://scene/point_checkpoint.tscn" id="4_3d8sx"]
+[ext_resource type="Texture2D" uid="uid://rs7vhpf0r4f8" path="res://images/bkgrnd.png" id="3_02h1f"]
+[ext_resource type="PackedScene" uid="uid://b12qt4hobwfh5" path="res://scene/wall.tscn" id="3_x67t4"]
+[ext_resource type="PackedScene" uid="uid://mmn38yo4lrnn" path="res://scene/point_checkpoint.tscn" id="4_3d8sx"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_c5d5b")
@@ -110,8 +110,8 @@ position = Vector2(-404, -116)
 scale = Vector2(7.06589, 4.97959)
 
 [node name="PointCheckpoint1" parent="Points" instance=ExtResource("4_3d8sx")]
-position = Vector2(-382, -207)
-rotation = 0.594134
+position = Vector2(-377, -206)
+rotation = 0.829389
 scale = Vector2(8.58642, 6.05117)
 
 [node name="PointCheckpoint11" parent="Points" instance=ExtResource("4_3d8sx")]
@@ -146,17 +146,17 @@ scale = Vector2(-8.58642, -6.05117)
 
 [node name="PointCheckpoint5" parent="Points" instance=ExtResource("4_3d8sx")]
 position = Vector2(336, 16)
-rotation = 2.00621
+rotation = 2.14483
 scale = Vector2(-10.9034, -6.05117)
 
 [node name="PointCheckpoint14" parent="Points" instance=ExtResource("4_3d8sx")]
-position = Vector2(416, 96)
-rotation = 2.51067
+position = Vector2(421, 120)
+rotation = 3.07256
 scale = Vector2(-10.9034, -6.05117)
 
 [node name="PointCheckpoint15" parent="Points" instance=ExtResource("4_3d8sx")]
-position = Vector2(386, 213)
-rotation = 3.55416
+position = Vector2(374, 230)
+rotation = 3.82548
 scale = Vector2(-10.9034, -6.05117)
 
 [node name="PointCheckpoint6" parent="Points" instance=ExtResource("4_3d8sx")]

@@ -10,7 +10,7 @@ var nn = {
 	#Consts
 	"nb_inputs" = 6,
 	"nb_hidden_layer" = 1,
-	"nb_hidden_neurones" = [4],
+	"nb_hidden_neurones" = [1],
 	"nb_outputs" = 3,
 
 	"weights_list" = [[[[]]]],
