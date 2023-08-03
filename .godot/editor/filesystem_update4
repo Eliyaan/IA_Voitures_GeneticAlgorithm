@@ -1,2 +1,6 @@
 res://scene/main.tscn
 res://codes/voiture.gd
+res://codes/main.gd
+res://scene/wall.gd
+res://scene/voiture.tscn
+res://scene/wall.tscn

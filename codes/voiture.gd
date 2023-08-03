@@ -2,7 +2,6 @@ extends Node2D
 var deplac: Vector2 = Vector2(0, 0)
 var alive: bool = false
 var points: int = 0
-var drift: bool = false
 var rota_array: Array = []
 var rays_querries: Array = []
 var space_state
@@ -11,7 +10,7 @@ var nn = {
 	"nb_inputs" = 6,
 	"nb_hidden_layer" = 1,
 	"nb_hidden_neurones" = [1],
-	"nb_outputs" = 3,
+	"nb_outputs" = 2,
 
 	"weights_list" = [[[[]]]],
 	"layers_list"  = [[[]]],  # bias, output(activ)
@@ -103,6 +102,8 @@ func raycast():
 	
 func _process(_delta):
 	if alive and get_parent().get_parent().running:
+		#modulate.a = 0.05*(points)
+		modulate.a = 1
 		var nn_array = raycast()
 		nn_array.append(deplac.y)
 		var result = fprop(nn_array)
@@ -111,19 +112,7 @@ func _process(_delta):
 			deplac.y = 0
 		elif deplac.y < -12:
 			deplac.y = -12
-		if drift:
-			if result[2] >= 0.5:
-				$Car.position = Vector2(0, 6)
-				position += Vector2(0, 24).rotated(rotation)
-				drift = false
-				#$Car/Car/Voiture.frame = 0
-		else:
-			if result[2] <= 0.5:
-				$Car.position = Vector2(0, 30)
-				position -= Vector2(0, 24).rotated(rotation)
-				drift = true
-				#$Car/Car/Voiture.frame = 1
-		rotation_degrees += (result[1]*2 - 1) * deplac.y * 0.8  # le 0.8 c'est un facteur changeable selon si on veut qu'elle tourne plus vite ou pas
+		rotation_degrees += (result[1]*2 - 1) * deplac.y * 0.5  # le 0.8 c'est un facteur changeable selon si on veut qu'elle tourne plus vite ou pas
 		position += deplac.rotated(rotation)
 
 	
