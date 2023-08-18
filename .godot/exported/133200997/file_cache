@@ -1,4 +1,6 @@
-res://scene/main.tscn::544bb9ec61bc300700a4d965d3105227::1683392936::res://.godot/exported/133200997/export-fa9c8ff5b16a5ec23280afa6577b07ee-main.scn
-res://scene/point_checkpoint.tscn::d94194628b8a30af28230f600775b199::1683374536::res://.godot/exported/133200997/export-d094b507951da6ad09de4cad1217423b-point_checkpoint.scn
-res://scene/voiture.tscn::55bb6b1de62a9b837696ef67bb3240c5::1683392936::res://.godot/exported/133200997/export-8c977727c77caa31f67cc47a6b50977e-voiture.scn
-res://scene/wall.tscn::967c7cba68b420972b2fbc4e90c0d017::1683392936::res://.godot/exported/133200997/export-518334c36348fd023830da94e54cc1f3-wall.scn
+res://scene/main.tscn::c41f4f69a2aa1d7331ac84fc203a473d::1691943216::res://.godot/exported/133200997/export-fa9c8ff5b16a5ec23280afa6577b07ee-main.scn
+res://scene/point_checkpoint.tscn::d34902a4dd81896cefb97e31728952d9::1691943217::res://.godot/exported/133200997/export-d094b507951da6ad09de4cad1217423b-point_checkpoint.scn
+res://scene/voiture.tscn::7f8a8cdd5915d73a820fca7352d68a08::1691943217::res://.godot/exported/133200997/export-8c977727c77caa31f67cc47a6b50977e-voiture.scn
+res://scene/wall.tscn::72a712d0edb44eaf7a8c4f9c0605850a::1691943217::res://.godot/exported/133200997/export-518334c36348fd023830da94e54cc1f3-wall.scn
+res://scene/route_droite.tscn::925973d43e819c5db0136c2f2429580e::1691046864::res://.godot/exported/133200997/export-5273b967bc87b11ce4df8895cc1fe351-route_droite.scn
+res://scene/route_tourne_droite.tscn::ca021bed18566b7326e55f24ffa31ca0::1691046864::res://.godot/exported/133200997/export-21bed893257ebab7b8264cfa4c541b54-route_tourne_droite.scn

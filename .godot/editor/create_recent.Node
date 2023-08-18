@@ -1,8 +1,10 @@
+Line2D
+Node2D
 Sprite2D
+RichTextLabel
 StaticBody2D
 Area2D
 AnimatedSprite2D
-Node2D
 CollisionShape2D
 Node
 RayCast2D

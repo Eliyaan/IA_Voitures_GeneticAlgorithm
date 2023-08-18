@@ -1,14 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://g81eg0hrr6ud"]
+[gd_scene load_steps=8 format=3 uid="uid://g81eg0hrr6ud"]
 
 [ext_resource type="Script" path="res://codes/main.gd" id="1_c5d5b"]
 [ext_resource type="PackedScene" uid="uid://dlbqgeld5mfxf" path="res://scene/voiture.tscn" id="2_qud33"]
 [ext_resource type="Texture2D" uid="uid://rs7vhpf0r4f8" path="res://images/bkgrnd.png" id="3_02h1f"]
+[ext_resource type="PackedScene" uid="uid://s2y8mbgw2ogk" path="res://scene/neuron.tscn" id="3_47fmm"]
 [ext_resource type="PackedScene" uid="uid://b12qt4hobwfh5" path="res://scene/wall.tscn" id="3_x67t4"]
 [ext_resource type="PackedScene" uid="uid://mmn38yo4lrnn" path="res://scene/point_checkpoint.tscn" id="4_3d8sx"]
+[ext_resource type="PackedScene" uid="uid://dsxh8ec2jfjia" path="res://scene/line.tscn" id="4_cvvov"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_c5d5b")
 voitures = ExtResource("2_qud33")
+neuron_prefab = ExtResource("3_47fmm")
+new_line = ExtResource("4_cvvov")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.45098, 0.545098, 1, 1)
@@ -100,6 +104,7 @@ rotation = 0.740528
 scale = Vector2(3.41152, -3.34772)
 
 [node name="Points" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
 
 [node name="PointCheckpoint" parent="Points" instance=ExtResource("4_3d8sx")]
 position = Vector2(-402, -25)
@@ -115,17 +120,17 @@ rotation = 0.829389
 scale = Vector2(8.58642, 6.05117)
 
 [node name="PointCheckpoint11" parent="Points" instance=ExtResource("4_3d8sx")]
-position = Vector2(-254, -241)
+position = Vector2(-283, -248)
 rotation = 1.46283
 scale = Vector2(8.58642, 6.05117)
 
 [node name="PointCheckpoint2" parent="Points" instance=ExtResource("4_3d8sx")]
-position = Vector2(-148, -189)
+position = Vector2(-186, -218)
 rotation = 2.23647
 scale = Vector2(-8.58642, -6.05117)
 
 [node name="PointCheckpoint12" parent="Points" instance=ExtResource("4_3d8sx")]
-position = Vector2(-76, -85)
+position = Vector2(-88, -98)
 rotation = 2.41166
 scale = Vector2(-8.58642, -6.05117)
 
@@ -200,3 +205,16 @@ rotation = 2.89434
 scale = Vector2(-8.58642, -6.05117)
 
 [node name="Voitures" type="Node" parent="."]
+
+[node name="best" type="RichTextLabel" parent="."]
+offset_left = 94.0
+offset_top = -138.0
+offset_right = 782.0
+offset_bottom = -46.0
+scale = Vector2(0.611563, 0.611563)
+theme_override_font_sizes/normal_font_size = 60
+text = "LAST GEN BEST: "
+
+[node name="Lines" type="Node2D" parent="."]
+
+[node name="Neurons" type="Node2D" parent="."]

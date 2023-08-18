@@ -5,15 +5,16 @@ var points: int = 0
 var rota_array: Array = []
 var rays_querries: Array = []
 var space_state
+var input: Array = []
 var nn = {
 	#Consts
 	"nb_inputs" = 6,
 	"nb_hidden_layer" = 1,
-	"nb_hidden_neurones" = [1],
+	"nb_hidden_neurones" = [4],
 	"nb_outputs" = 2,
 
 	"weights_list" = [[[[]]]],
-	"layers_list"  = [[[]]],  # bias, output(activ)
+	"layers_list"  = [[[]]],  # [][bias, output(activ)][]
 }
 
 func set_rd_wb_values():
@@ -106,6 +107,7 @@ func _process(_delta):
 		modulate.a = 1
 		var nn_array = raycast()
 		nn_array.append(deplac.y)
+		input = nn_array.duplicate(true)
 		var result = fprop(nn_array)
 		deplac.y -= (result[0]*2 - 1)
 		if deplac.y > 0: 
