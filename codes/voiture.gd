@@ -3,6 +3,7 @@ var deplac: Vector2 = Vector2(0, 0)
 var alive: bool = false
 var points: int = 0
 var rota_array: Array = []
+var rot_change = 0
 var rays_querries: Array = []
 var space_state
 var input: Array = []
@@ -10,7 +11,7 @@ var nn = {
 	#Consts
 	"nb_inputs" = 6,
 	"nb_hidden_layer" = 1,
-	"nb_hidden_neurones" = [4],
+	"nb_hidden_neurones" = [3],
 	"nb_outputs" = 2,
 
 	"weights_list" = [[[[]]]],
@@ -71,7 +72,7 @@ func init():
 				nn["weights_list"][i][j].resize(nn["nb_hidden_neurones"][i-1])
 		else:
 			nn["weights_list"][i].resize(nn["nb_hidden_neurones"][i])
-			for j in nn["weights_list"][i]:
+			for j in range(0, nn["weights_list"][i].size()):
 				nn["weights_list"][i][j] = []
 				nn["weights_list"][i][j].resize(nn["nb_hidden_neurones"][i-1])
 	for i in range(0, nn["nb_hidden_layer"]+1):
@@ -114,7 +115,8 @@ func _process(_delta):
 			deplac.y = 0
 		elif deplac.y < -12:
 			deplac.y = -12
-		rotation_degrees += (result[1]*2 - 1) * deplac.y * 0.5  # le 0.8 c'est un facteur changeable selon si on veut qu'elle tourne plus vite ou pas
+		rot_change = (rot_change/5)*4 + ((result[1]*2 - 1) * deplac.y * 0.5)/5  # le 0.5 c'est un facteur changeable selon si on veut qu'elle tourne plus vite ou pas
+		rotation_degrees += rot_change
 		position += deplac.rotated(rotation)
 
 	

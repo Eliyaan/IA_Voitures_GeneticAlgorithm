@@ -3,5 +3,5 @@
 [ext_resource type="Texture2D" uid="uid://cdn7s6fgy45kv" path="res://images/circle.png" id="1_5ps40"]
 
 [node name="Neuron" type="Sprite2D"]
-scale = Vector2(0.0744447, 0.0744447)
+scale = Vector2(0.105, 0.105)
 texture = ExtResource("1_5ps40")

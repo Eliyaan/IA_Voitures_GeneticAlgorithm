@@ -1,8 +1,6 @@
 res://scene/main.tscn
 res://codes/main.gd
-res://codes/voiture.gd
-res://scene/wall.tscn
-res://scene/neuron.tscn
-res://scene/voiture.tscn
-res://scene/point_checkpoint.tscn
 res://scene/line.tscn
+res://scene/neuron.tscn
+res://codes/voiture.gd
+res://scene/voiture.tscn

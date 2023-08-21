@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://g81eg0hrr6ud"]
+[gd_scene load_steps=7 format=3 uid="uid://g81eg0hrr6ud"]
 
 [ext_resource type="Script" path="res://codes/main.gd" id="1_c5d5b"]
 [ext_resource type="PackedScene" uid="uid://dlbqgeld5mfxf" path="res://scene/voiture.tscn" id="2_qud33"]
-[ext_resource type="Texture2D" uid="uid://rs7vhpf0r4f8" path="res://images/bkgrnd.png" id="3_02h1f"]
 [ext_resource type="PackedScene" uid="uid://s2y8mbgw2ogk" path="res://scene/neuron.tscn" id="3_47fmm"]
 [ext_resource type="PackedScene" uid="uid://b12qt4hobwfh5" path="res://scene/wall.tscn" id="3_x67t4"]
 [ext_resource type="PackedScene" uid="uid://mmn38yo4lrnn" path="res://scene/point_checkpoint.tscn" id="4_3d8sx"]
@@ -14,14 +13,12 @@ voitures = ExtResource("2_qud33")
 neuron_prefab = ExtResource("3_47fmm")
 new_line = ExtResource("4_cvvov")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.45098, 0.545098, 1, 1)
-self_modulate = Color(0.337255, 0.701961, 0.411765, 1)
-position = Vector2(-13.9999, -24)
-scale = Vector2(1280, 912)
-texture = ExtResource("3_02h1f")
-
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="ColorRect6" type="ColorRect" parent="."]
+offset_left = -830.0
+offset_top = -1037.0
+offset_right = 590.0
+offset_bottom = 1191.0
+color = Color(0.109804, 0.780392, 0.278431, 1)
 
 [node name="Terrain" type="Node2D" parent="."]
 
@@ -38,29 +35,29 @@ position = Vector2(30, 342)
 scale = Vector2(57.2652, 4.73011)
 
 [node name="Wall6" parent="Terrain" instance=ExtResource("3_x67t4")]
-position = Vector2(7, 131)
+position = Vector2(12, 131)
 scale = Vector2(-27.1315, -4.56708)
 
 [node name="Wall8" parent="Terrain" instance=ExtResource("3_x67t4")]
-position = Vector2(366, -134)
-scale = Vector2(-29.7715, -4.56708)
+position = Vector2(364, -139)
+scale = Vector2(-29.7715, -5.04708)
 
 [node name="Wall5" parent="Terrain" instance=ExtResource("3_x67t4")]
 position = Vector2(72, -354)
 scale = Vector2(57.2652, 4.73011)
 
 [node name="Wall3" parent="Terrain" instance=ExtResource("3_x67t4")]
-position = Vector2(-265, -1)
-scale = Vector2(-6.13346, 11.3519)
+position = Vector2(-264, 3)
+scale = Vector2(-5.97346, 11.4719)
 
 [node name="Wall9" parent="Terrain" instance=ExtResource("3_x67t4")]
-position = Vector2(-127, 86)
-rotation = 0.442615
+position = Vector2(-127, 77)
+rotation = 0.499446
 scale = Vector2(11.3353, -5.16153)
 
 [node name="Wall11" parent="Terrain" instance=ExtResource("3_x67t4")]
-position = Vector2(-197, 5)
-rotation = 1.0666
+position = Vector2(-194, 7.00001)
+rotation = 1.07488
 scale = Vector2(11.3353, -5.16153)
 
 [node name="Wall10" parent="Terrain" instance=ExtResource("3_x67t4")]
@@ -94,14 +91,50 @@ rotation = 0.740528
 scale = Vector2(4.34942, -4.26808)
 
 [node name="Wall18" parent="Terrain" instance=ExtResource("3_x67t4")]
-position = Vector2(-267, 116)
+position = Vector2(-263, 116)
 rotation = 0.740528
 scale = Vector2(4.34942, -4.26808)
 
 [node name="Wall19" parent="Terrain" instance=ExtResource("3_x67t4")]
-position = Vector2(277, 130)
+position = Vector2(284, 131)
 rotation = 0.740528
-scale = Vector2(3.41152, -3.34772)
+scale = Vector2(3.09691, -3.34772)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 526.0
+offset_top = -1037.0
+offset_right = 1946.0
+offset_bottom = 1191.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = -1331.0
+offset_top = -2600.0
+offset_right = 1264.0
+offset_bottom = -372.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+offset_left = -3109.0
+offset_top = -1301.0
+offset_right = -514.0
+offset_bottom = 927.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="."]
+offset_left = -1293.0
+offset_top = 356.0
+offset_right = 1302.0
+offset_bottom = 2584.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="."]
+offset_left = -38.0
+offset_top = -1330.0
+offset_right = 1829.0
+offset_bottom = -339.0
+rotation = 0.410038
+color = Color(0, 0, 0, 1)
 
 [node name="Points" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -216,5 +249,13 @@ theme_override_font_sizes/normal_font_size = 60
 text = "LAST GEN BEST: "
 
 [node name="Lines" type="Node2D" parent="."]
+position = Vector2(122, -3)
+
+[node name="NeurBkgd" type="Node2D" parent="."]
+position = Vector2(122, -3)
 
 [node name="Neurons" type="Node2D" parent="."]
+position = Vector2(122, -3)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(133, 0)
