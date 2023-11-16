@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://budc6r1pcdx7l"]
+
+[ext_resource type="Script" path="res://codes/Car.gd" id="1_0jm2n"]
+[ext_resource type="Texture2D" uid="uid://b384bdy8m3bpd" path="res://images/best_car.png" id="2_3vlvw"]
+[ext_resource type="Script" path="res://scene/CarRigid.gd" id="2_tenwl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0kw1k"]
+size = Vector2(42, 90)
+
+[node name="Car" type="Node2D"]
+script = ExtResource("1_0jm2n")
+
+[node name="RB" type="RigidBody2D" parent="."]
+collision_mask = 2
+mass = 250.0
+gravity_scale = 0.0
+max_contacts_reported = 1
+contact_monitor = true
+linear_damp_mode = 1
+linear_damp = 6.0
+angular_damp = 5.0
+constant_torque = 2.0
+script = ExtResource("2_tenwl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RB"]
+position = Vector2(0, -39)
+shape = SubResource("RectangleShape2D_0kw1k")
+
+[node name="Sprite2D" type="Sprite2D" parent="RB"]
+position = Vector2(0, -35)
+texture = ExtResource("2_3vlvw")
+
+[connection signal="body_shape_entered" from="RB" to="." method="_on_rb_body_shape_entered"]

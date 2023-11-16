@@ -1,22 +1,25 @@
 extends Node2D
-var deplac: Vector2 = Vector2(0, 0)
-var alive: bool = false
-var points: int = 0
-var rota_array: Array = []
-var rot_change = 0
+#var deplac: Vector2 = Vector2(0, 0)
+var points: float = 0
+var nb = 0
+var ray_rota_arrays: Array = []
+#var rot_change = 0
 var rays_querries: Array = []
 var space_state
 var input: Array = []
+var alive = false
+var vel = Vector2.ZERO
 var nn = {
 	#Consts
 	"nb_inputs" = 6,
 	"nb_hidden_layer" = 1,
-	"nb_hidden_neurones" = [5],
+	"nb_hidden_neurones" = [8],
 	"nb_outputs" = 2,
 
 	"weights_list" = [[[[]]]],
 	"layers_list"  = [[[]]],  # [][bias, output(activ)][]
 }
+
 
 func set_rd_wb_values():
 	#Weights
@@ -85,17 +88,16 @@ func init():
 	set_rd_wb_values()
 
 func _ready():
+	init()
 	space_state = get_world_2d().direct_space_state
 	for n in range(5):
-		rota_array.append(deg_to_rad(n*45 - 90))
+		ray_rota_arrays.append(deg_to_rad(n*45 - 90))
 		rays_querries.append(PhysicsRayQueryParameters2D.create(global_position, global_position, 0b10))
-		for ray in rays_querries:
-			ray.set_collide_with_areas(true)
 
 func raycast():
 	var nn_array = []
 	for n in range(5):
-		rays_querries[n].set_to(global_position + Vector2(0, -300).rotated(rota_array[n] + rotation))
+		rays_querries[n].set_to(global_position + Vector2(0, -70).rotated(ray_rota_arrays[n] + $RB.rotation))
 		rays_querries[n].set_from(global_position)
 		var result = space_state.intersect_ray(rays_querries[n])  # coords of touch = result.position
 		if result:
@@ -104,29 +106,36 @@ func raycast():
 			nn_array.append(0)
 	return nn_array
 	
-func _process(_delta):
-	if alive and get_parent().get_parent().running:
-		#modulate.a = 0.05*(points)
+func _physics_process(_delta):
+	if alive:
 		modulate.a = 1
 		var nn_array = raycast()
-		nn_array.append(deplac.y)
+		nn_array.append($RB.linear_velocity.length())
 		input = nn_array.duplicate(true)
 		var result = fprop(nn_array)
-		deplac.y -= (result[0]*2 - 1)*(0.6-abs(rot_change)/10)
-		if deplac.y > 0: 
-			deplac.y = 0
-		elif deplac.y < -20:
-			deplac.y = -20
-		rot_change = (rot_change/5)*4 + ((result[1]*2 - 1) * deplac.y * 0.5)/5  # le 0.5 c'est un facteur changeable selon si on veut qu'elle tourne plus vite ou pas
-		rotation_degrees += rot_change
-		position += deplac.rotated(rotation)
+		vel = (Vector2(0, -result[0]).rotated($RB.rotation)*2000000)/50 + vel*49/50
+		$RB.apply_central_force(vel)
+		$RB.apply_torque_impulse((result[1]*2-1)*300*$RB.linear_velocity.length())
+		#$RB.rotation += (result[1]*0.003*$RB.linear_velocity.length())
+		#var truc = $RB.constant_torque
+		#$RB.constant_torque = (result[1]*200000)
+		#print(str(truc) + " " + str($RB.constant_torque))
+		#print($RB.constant_torque)
 
+func stop():
+	alive = false
+	$RB.constant_torque = 0
+	$RB.reset = true
 	
-#func _on_area_2d_body_entered(_body):
-#	alive = false
+func restart():
+	alive = true
 
 
-#func _on_area_2d_area_entered(area):
-#	if "PointCheckpoint" in area.name:
-#		if points%10 == area.get_index()%10:
-#			points += 1
+
+func _on_rb_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+	if "Terrain" in body.get_parent().name:
+		#alive = false
+		#$RB.apply_central_force(-$RB.linear_velocity*1)
+		vel = Vector2.ZERO
+		points *= 0.9
+

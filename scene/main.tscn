@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://g81eg0hrr6ud"]
+[gd_scene load_steps=8 format=3 uid="uid://g81eg0hrr6ud"]
 
 [ext_resource type="Script" path="res://codes/main.gd" id="1_c5d5b"]
 [ext_resource type="PackedScene" uid="uid://dlbqgeld5mfxf" path="res://scene/voiture.tscn" id="2_qud33"]
 [ext_resource type="PackedScene" uid="uid://s2y8mbgw2ogk" path="res://scene/neuron.tscn" id="3_47fmm"]
-[ext_resource type="PackedScene" uid="uid://b12qt4hobwfh5" path="res://scene/wall.tscn" id="3_x67t4"]
 [ext_resource type="PackedScene" uid="uid://mmn38yo4lrnn" path="res://scene/point_checkpoint.tscn" id="4_3d8sx"]
 [ext_resource type="PackedScene" uid="uid://dsxh8ec2jfjia" path="res://scene/line.tscn" id="4_cvvov"]
+[ext_resource type="Texture2D" uid="uid://dymv81tlqlxok" path="res://images/bkg.jpg" id="5_350i5"]
+[ext_resource type="Script" path="res://scene/wall.gd" id="6_evga0"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_c5d5b")
@@ -13,229 +14,233 @@ voitures = ExtResource("2_qud33")
 neuron_prefab = ExtResource("3_47fmm")
 new_line = ExtResource("4_cvvov")
 
-[node name="ColorRect6" type="ColorRect" parent="."]
-offset_left = -830.0
-offset_top = -1037.0
-offset_right = 590.0
-offset_bottom = 1191.0
-color = Color(0.109804, 0.780392, 0.278431, 1)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("5_350i5")
+metadata/_edit_lock_ = true
 
 [node name="Terrain" type="Node2D" parent="."]
 
-[node name="Wall" parent="Terrain" instance=ExtResource("3_x67t4")]
-position = Vector2(-530, 0.999992)
-scale = Vector2(5.16179, 41.5887)
+[node name="Inside" type="Area2D" parent="Terrain"]
+collision_layer = 2
+script = ExtResource("6_evga0")
 
-[node name="Wall4" parent="Terrain" instance=ExtResource("3_x67t4")]
-position = Vector2(525, -30)
-scale = Vector2(5.16179, 54.1487)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Terrain/Inside"]
+polygon = PackedVector2Array(-1587, 102, -1537, -82, -1441, -237, -1308, -347, -1205, -392, -1129, -392, -1014, -354, -826, -278, -397, -127, -161, -114, 59, -179, 297, -282, 649, -397, 959, -437, 1168, -430, 1345, -394, 1516, -302, 1596, -213, 1619, -64, 1596, 117, 1498, 263, 1327, 378, 1096, 447, 793, 434, -280, 129, -463, 114, -651, 118, -773, 149, -905, 202, -999, 255, -1229, 383, -1359, 427, -1429, 419, -1499, 373, -1581, 225)
 
-[node name="Wall2" parent="Terrain" instance=ExtResource("3_x67t4")]
-position = Vector2(30, 342)
-scale = Vector2(57.2652, 4.73011)
+[node name="Outside" type="Area2D" parent="Terrain"]
+collision_layer = 2
+script = ExtResource("6_evga0")
 
-[node name="Wall6" parent="Terrain" instance=ExtResource("3_x67t4")]
-position = Vector2(12, 131)
-scale = Vector2(-27.1315, -4.56708)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Terrain/Outside"]
+position = Vector2(100, 34)
+polygon = PackedVector2Array(-1883, -53, -1778, -308, -1627, -492, -1400, -623, -1219, -638, -1091, -612, -842, -503, -570, -404, -389, -369, -170, -392, 216, -552, 587, -654, 898, -688, 1216, -655, 1465, -561, 1631, -417, 1703, -279, 1736, -88, 1930, -84, 1955, -853, -2122, -857, -2179, -30)
+metadata/_edit_lock_ = true
 
-[node name="Wall8" parent="Terrain" instance=ExtResource("3_x67t4")]
-position = Vector2(364, -139)
-scale = Vector2(-29.7715, -5.04708)
-
-[node name="Wall5" parent="Terrain" instance=ExtResource("3_x67t4")]
-position = Vector2(72, -354)
-scale = Vector2(57.2652, 4.73011)
-
-[node name="Wall3" parent="Terrain" instance=ExtResource("3_x67t4")]
-position = Vector2(-264, 3)
-scale = Vector2(-5.97346, 11.4719)
-
-[node name="Wall9" parent="Terrain" instance=ExtResource("3_x67t4")]
-position = Vector2(-127, 77)
-rotation = 0.499446
-scale = Vector2(11.3353, -5.16153)
-
-[node name="Wall11" parent="Terrain" instance=ExtResource("3_x67t4")]
-position = Vector2(-194, 7.00001)
-rotation = 1.07488
-scale = Vector2(11.3353, -5.16153)
-
-[node name="Wall10" parent="Terrain" instance=ExtResource("3_x67t4")]
-position = Vector2(-19, -236)
-rotation = 0.740528
-scale = Vector2(16.2372, -5.10674)
-
-[node name="Wall12" parent="Terrain" instance=ExtResource("3_x67t4")]
-position = Vector2(465, -24)
-rotation = 0.740528
-scale = Vector2(19.6202, -5.10674)
-
-[node name="Wall13" parent="Terrain" instance=ExtResource("3_x67t4")]
-position = Vector2(515, 258)
-rotation = 0.740528
-scale = Vector2(6.37092, -13.5362)
-
-[node name="Wall14" parent="Terrain" instance=ExtResource("3_x67t4")]
-position = Vector2(-517, -309)
-rotation = 0.740528
-scale = Vector2(6.37092, -6.65954)
-
-[node name="Wall15" parent="Terrain" instance=ExtResource("3_x67t4")]
-position = Vector2(-493, 326)
-rotation = 0.740528
-scale = Vector2(6.37092, -6.65954)
-
-[node name="Wall17" parent="Terrain" instance=ExtResource("3_x67t4")]
-position = Vector2(-263, -115)
-rotation = 0.740528
-scale = Vector2(4.34942, -4.26808)
-
-[node name="Wall18" parent="Terrain" instance=ExtResource("3_x67t4")]
-position = Vector2(-263, 116)
-rotation = 0.740528
-scale = Vector2(4.34942, -4.26808)
-
-[node name="Wall19" parent="Terrain" instance=ExtResource("3_x67t4")]
-position = Vector2(284, 131)
-rotation = 0.740528
-scale = Vector2(3.09691, -3.34772)
-
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = 526.0
-offset_top = -1037.0
-offset_right = 1946.0
-offset_bottom = 1191.0
-color = Color(0, 0, 0, 1)
-
-[node name="ColorRect2" type="ColorRect" parent="."]
-offset_left = -1331.0
-offset_top = -2600.0
-offset_right = 1264.0
-offset_bottom = -372.0
-color = Color(0, 0, 0, 1)
-
-[node name="ColorRect3" type="ColorRect" parent="."]
-offset_left = -3109.0
-offset_top = -1301.0
-offset_right = -514.0
-offset_bottom = 927.0
-color = Color(0, 0, 0, 1)
-
-[node name="ColorRect4" type="ColorRect" parent="."]
-offset_left = -1293.0
-offset_top = 356.0
-offset_right = 1302.0
-offset_bottom = 2584.0
-color = Color(0, 0, 0, 1)
-
-[node name="ColorRect5" type="ColorRect" parent="."]
-offset_left = -38.0
-offset_top = -1330.0
-offset_right = 1829.0
-offset_bottom = -339.0
-rotation = 0.410038
-color = Color(0, 0, 0, 1)
+[node name="Bottom" type="CollisionPolygon2D" parent="Terrain/Outside"]
+polygon = PackedVector2Array(-1784, -23, -1797, 208, -1780, 307, -1740, 405, -1683, 489, -1616, 550, -1550, 598, -1465, 631, -1394, 646, -1328, 641, -1233, 614, -1130, 575, -951, 469, -740, 356, -536, 316, -285, 353, 477, 589, 714, 639, 959, 668, 1214, 646, 1413, 578, 1592, 459, 1748, 294, 1816, 139, 1830, -54, 2032, -54, 2008, 797, -2010, 793, -2083, -9)
 
 [node name="Points" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
 
-[node name="PointCheckpoint" parent="Points" instance=ExtResource("4_3d8sx")]
-position = Vector2(-402, -25)
-scale = Vector2(7.06589, 4.97959)
-
-[node name="PointCheckpoint10" parent="Points" instance=ExtResource("4_3d8sx")]
-position = Vector2(-404, -116)
-scale = Vector2(7.06589, 4.97959)
-
-[node name="PointCheckpoint1" parent="Points" instance=ExtResource("4_3d8sx")]
-position = Vector2(-377, -206)
-rotation = 0.829389
-scale = Vector2(8.58642, 6.05117)
-
-[node name="PointCheckpoint11" parent="Points" instance=ExtResource("4_3d8sx")]
-position = Vector2(-283, -248)
-rotation = 1.46283
-scale = Vector2(8.58642, 6.05117)
-
-[node name="PointCheckpoint2" parent="Points" instance=ExtResource("4_3d8sx")]
-position = Vector2(-186, -218)
-rotation = 2.23647
-scale = Vector2(-8.58642, -6.05117)
-
-[node name="PointCheckpoint12" parent="Points" instance=ExtResource("4_3d8sx")]
-position = Vector2(-88, -98)
-rotation = 2.41166
-scale = Vector2(-8.58642, -6.05117)
-
-[node name="PointCheckpoint3" parent="Points" instance=ExtResource("4_3d8sx")]
-position = Vector2(-2, -17)
-rotation = 2.05283
-scale = Vector2(-8.58642, -6.05117)
-
-[node name="PointCheckpoint4" parent="Points" instance=ExtResource("4_3d8sx")]
-position = Vector2(106, -3)
-rotation = 1.60516
-scale = Vector2(-8.58642, -6.05117)
-
-[node name="PointCheckpoint13" parent="Points" instance=ExtResource("4_3d8sx")]
-position = Vector2(220, -1)
-rotation = 1.60516
-scale = Vector2(-8.58642, -6.05117)
-
 [node name="PointCheckpoint5" parent="Points" instance=ExtResource("4_3d8sx")]
-position = Vector2(336, 16)
-rotation = 2.14483
-scale = Vector2(-10.9034, -6.05117)
-
-[node name="PointCheckpoint14" parent="Points" instance=ExtResource("4_3d8sx")]
-position = Vector2(421, 120)
-rotation = 3.07256
-scale = Vector2(-10.9034, -6.05117)
-
-[node name="PointCheckpoint15" parent="Points" instance=ExtResource("4_3d8sx")]
-position = Vector2(374, 230)
-rotation = 3.82548
-scale = Vector2(-10.9034, -6.05117)
+position = Vector2(737, 530)
+rotation = 1.82898
+scale = Vector2(10.4213, 10.4213)
 
 [node name="PointCheckpoint6" parent="Points" instance=ExtResource("4_3d8sx")]
-position = Vector2(255, 250)
-rotation = 1.37998
-scale = Vector2(-8.58642, -6.05117)
-
-[node name="PointCheckpoint16" parent="Points" instance=ExtResource("4_3d8sx")]
-position = Vector2(139, 247)
-rotation = 1.37998
-scale = Vector2(-8.58642, -6.05117)
+position = Vector2(502, 481)
+rotation = 1.82964
+scale = Vector2(10.4213, 10.4213)
 
 [node name="PointCheckpoint7" parent="Points" instance=ExtResource("4_3d8sx")]
-position = Vector2(34, 245)
-rotation = 1.56013
-scale = Vector2(-8.58642, -6.05117)
-
-[node name="PointCheckpoint17" parent="Points" instance=ExtResource("4_3d8sx")]
-position = Vector2(-75, 240)
-rotation = 1.56013
-scale = Vector2(-8.58642, -6.05117)
+position = Vector2(321, 426)
+rotation = 1.86994
+scale = Vector2(10.4213, 10.4213)
 
 [node name="PointCheckpoint8" parent="Points" instance=ExtResource("4_3d8sx")]
-position = Vector2(-200, 239)
-rotation = 1.56013
-scale = Vector2(-8.58642, -6.05117)
-
-[node name="PointCheckpoint18" parent="Points" instance=ExtResource("4_3d8sx")]
-position = Vector2(-303, 234)
-rotation = 1.92368
-scale = Vector2(-8.58642, -6.05117)
+position = Vector2(117, 354)
+rotation = 1.90407
+scale = Vector2(10.4213, 10.4213)
 
 [node name="PointCheckpoint9" parent="Points" instance=ExtResource("4_3d8sx")]
-position = Vector2(-390, 189)
-rotation = 2.64947
-scale = Vector2(-8.58642, -6.05117)
+position = Vector2(-77, 297)
+rotation = 1.85752
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint10" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(-266, 247)
+rotation = 1.78708
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint11" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(-460, 220)
+rotation = 1.6278
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint12" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(-686, 232)
+rotation = 1.38107
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint13" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(-856, 292)
+rotation = 1.1025
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint14" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(-1006, 380)
+rotation = 1.05543
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint15" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(-1226, 494)
+rotation = 1.20276
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint16" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(-1498, 513)
+rotation = 2.17628
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint17" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(-1555, 463)
+rotation = 2.21598
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint18" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(-1610, 396)
+rotation = 2.48703
+scale = Vector2(10.4213, 10.4213)
 
 [node name="PointCheckpoint19" parent="Points" instance=ExtResource("4_3d8sx")]
-position = Vector2(-400, 87)
-rotation = 2.89434
-scale = Vector2(-8.58642, -6.05117)
+position = Vector2(-1706, 204)
+rotation = -0.0672238
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint20" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(-1668, -22)
+rotation = 0.324026
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint21" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(-1573, -253)
+rotation = 0.587102
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint22" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(-1425, -413)
+rotation = 0.90831
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint23" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(-1261, -494)
+rotation = 1.29517
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint24" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(-1059, -478)
+rotation = 1.96923
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint25" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(-832, -383)
+rotation = 1.94434
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint26" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(-615, -305)
+rotation = 1.97262
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint27" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(-437, -250)
+rotation = 1.78267
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint28" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(-253, -220)
+rotation = 1.6148
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint29" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(-89, -241)
+rotation = 1.26885
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint30" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(68, -312)
+rotation = 1.15694
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint31" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(236, -382)
+rotation = 1.24974
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint32" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(417, -441)
+rotation = 1.25928
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint33" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(649, -522)
+rotation = 1.47393
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint34" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(859, -547)
+rotation = 1.52225
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint35" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(1117, -547)
+rotation = 1.62529
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint36" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(1345, -503)
+rotation = 1.9564
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint37" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(1521, -431)
+rotation = 2.21427
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint38" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(1661, -280)
+rotation = 2.56337
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint39" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(1719, -11)
+rotation = 0.00951195
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint40" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(1690, 171)
+rotation = 0.519676
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(1602, 317)
+rotation = 0.841561
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint2" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(1457, 433)
+rotation = 0.841561
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint3" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(1271, 519)
+rotation = 1.40433
+scale = Vector2(10.4213, 10.4213)
+
+[node name="PointCheckpoint4" parent="Points" instance=ExtResource("4_3d8sx")]
+position = Vector2(1058, 558)
+rotation = 1.58776
+scale = Vector2(10.4213, 10.4213)
 
 [node name="Voitures" type="Node" parent="."]
 
@@ -258,4 +263,8 @@ position = Vector2(122, -3)
 position = Vector2(122, -3)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(133, 0)
+position = Vector2(10, 8)
+zoom = Vector2(0.325, 0.325)
+
+[connection signal="area_entered" from="Terrain/Inside" to="Terrain/Inside" method="_on_area_entered"]
+[connection signal="area_entered" from="Terrain/Outside" to="Terrain/Outside" method="_on_area_entered"]
