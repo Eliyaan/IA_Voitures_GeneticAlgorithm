@@ -112,7 +112,7 @@ func _process(_delta):
 		nn_array.append(deplac.y)
 		input = nn_array.duplicate(true)
 		var result = fprop(nn_array)
-		deplac.y -= (result[0]*2 - 1)*(0.6-abs(rot_change)/10)
+		deplac.y -= (result[0]*2 - 1)*(0.6)
 		if deplac.y > 0: 
 			deplac.y = 0
 		elif deplac.y < -20:

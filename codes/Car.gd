@@ -97,7 +97,7 @@ func _ready():
 func raycast():
 	var nn_array = []
 	for n in range(5):
-		rays_querries[n].set_to(global_position + Vector2(0, -70).rotated(ray_rota_arrays[n] + $RB.rotation))
+		rays_querries[n].set_to(global_position + Vector2(0, -400).rotated(ray_rota_arrays[n] + $RB.rotation))
 		rays_querries[n].set_from(global_position)
 		var result = space_state.intersect_ray(rays_querries[n])  # coords of touch = result.position
 		if result:
@@ -115,7 +115,7 @@ func _physics_process(_delta):
 		var result = fprop(nn_array)
 		vel = (Vector2(0, -result[0]).rotated($RB.rotation)*2000000)/50 + vel*49/50
 		$RB.apply_central_force(vel)
-		$RB.apply_torque_impulse((result[1]*2-1)*300*$RB.linear_velocity.length())
+		$RB.apply_torque_impulse((result[1]*2-1)*100*$RB.linear_velocity.length())
 		#$RB.rotation += (result[1]*0.003*$RB.linear_velocity.length())
 		#var truc = $RB.constant_torque
 		#$RB.constant_torque = (result[1]*200000)

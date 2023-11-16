@@ -43,11 +43,11 @@ zoom = Vector2(0.325, 0.325)
 
 [node name="Voitures" type="Node2D" parent="."]
 
+[node name="Lines" type="Node2D" parent="."]
+
 [node name="NeurBkgd" type="Node2D" parent="."]
 
 [node name="Neurons" type="Node2D" parent="."]
-
-[node name="Lines" type="Node2D" parent="."]
 
 [node name="Points" type="Node2D" parent="."]
 

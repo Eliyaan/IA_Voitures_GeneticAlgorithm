@@ -18,7 +18,7 @@ max_contacts_reported = 1
 contact_monitor = true
 linear_damp_mode = 1
 linear_damp = 6.0
-angular_damp = 5.0
+angular_damp = 10.0
 constant_torque = 2.0
 script = ExtResource("2_tenwl")
 
