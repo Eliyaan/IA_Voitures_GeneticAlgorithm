@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://mmn38yo4lrnn"]
 
-[ext_resource type="Script" path="res://scene/point_checkpoint.gd" id="1_dl4vp"]
+[ext_resource type="Script" path="res://codes/point_checkpoint.gd" id="1_m1cej"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gehkw"]
 size = Vector2(20, 1)
@@ -8,7 +8,7 @@ size = Vector2(20, 1)
 [node name="PointCheckpoint" type="Area2D"]
 collision_layer = 0
 monitorable = false
-script = ExtResource("1_dl4vp")
+script = ExtResource("1_m1cej")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -0.5)

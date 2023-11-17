@@ -106,8 +106,6 @@ func raycast():
 	
 func _process(_delta):
 	if alive and get_parent().get_parent().running:
-		#modulate.a = 0.05*(points)
-		modulate.a = 1
 		var nn_array = raycast()
 		nn_array.append(deplac.y)
 		input = nn_array.duplicate(true)

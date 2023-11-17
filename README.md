@@ -1,10 +1,3 @@
-# evol_voiture
-Une voiture rectangle
+# Genetic IA Cars
 
-Réseau de neurone : 
-
-entrée ray casting, vitesse,  (angle de direction (par rapport à lui même)pour plus tard)
-
-sortie accélération/frein (-1/1) et direction = delta angle (entre -1/1)
-
-Objectif : faire le plus de tours possible, en passant par les checkpoints (stocker la variable du score = dernier checkpoint)
+A bunch of cars with a little neural network brain that learns to drive through genetic algorithms.

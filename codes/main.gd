@@ -14,6 +14,7 @@ var first_gen: bool = true
 var neurons_pos_list = []
 var h_spacing = 80
 var v_spacing = 55
+var gen = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -67,91 +68,37 @@ func _ready():
 				var line = new_line.instantiate()
 				line.points[0] = coo
 				line.points[1] = sec_coo
+				line.width = 2
 				$Lines.add_child(line)
-	running = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if running:
 		steps += 1
-		if !first_gen:
-			var car = sorted_array[0]
-			$best.text = str(car.points)
-			var c = 0
-			for input in car.nn['nb_inputs']:
-				var n = $Neurons.get_child(c)
-				if car.input[c] > 0:
-					n.modulate.r = 0
-					n.modulate.g = 0.88
-					n.modulate.b = 0.34
-					n.scale.x = (car.sigmoid(car.input[c]/100))*0.104+0.001
-					n.scale.y = n.scale.x
-				else:
-					n.modulate.r = 1
-					n.modulate.g = 0.16
-					n.modulate.b = 0.14
-					n.scale.x = (car.sigmoid(-car.input[c]/5))*0.104+0.001  # the 5 is a special case but for other project use 2 times the same div
-					n.scale.y = n.scale.x
-				c += 1
-			var d = 0
-			for layer in car.nn["nb_hidden_neurones"]:
-				for nb in range(0, layer):
-					var n = $Neurons.get_child(c)
-					n.modulate.r = 0
-					n.modulate.g = 0.88
-					n.modulate.b = 0.34
-					n.scale.x = car.nn["layers_list"][d][1][nb]*0.104+0.001
-					n.scale.y = n.scale.x
-					c += 1
-				d += 1
-			for input in car.nn['nb_outputs']:
-				var n = $Neurons.get_child(c)
-				n.modulate.r = 0
-				n.modulate.g = 0.88
-				n.modulate.b = 0.34
-				n.scale.x = car.nn["layers_list"][d][1][input]*0.104+0.001
-				n.scale.y = n.scale.x
-				c += 1
-			var e = 0
-			for i in range(car.nn["weights_list"].size()):
-				for j in range(car.nn["weights_list"][i].size()):
-					for k in range(car.nn["weights_list"][i][j].size()):
-						var l = $Lines.get_child(e)
-						if car.nn["weights_list"][i][j][k] > 0:
-							l.modulate.r = 0
-							l.modulate.g = 0.88
-							l.modulate.b = 0.34
-							l.width = ((car.sigmoid(car.nn["weights_list"][i][j][k]))*6)+0.1
-						else:
-							l.modulate.r = 1
-							l.modulate.g = 0.16
-							l.modulate.b = 0.14
-							l.width = ((car.sigmoid(-car.nn["weights_list"][i][j][k]))*6)+0.1
-						e += 1
-	if steps == sim_steps - 1:
-		var null_vec = Vector2(0, 0)
-		sorted_array = $Voitures.get_children()
-		for voiture in sorted_array:
-			voiture.alive = false
-			voiture.deplac = null_vec
-			voiture.show()
-			voiture.position = Vector2(1003, 565)
-			voiture.rotation_degrees = -80
-			voiture.rot_change = 0
-		sorted_array.sort_custom(custom_sort)  # trier de la meilleure à la pire
-		first_gen = false
-	elif steps == sim_steps:
-		reset_sim()
-	elif steps == sim_steps + recovery_frames +1:
-		assert($Voitures.get_child_count() == nb_voitures)
-		for voiture in sorted_array:
-			voiture.alive = true
-			voiture.position = Vector2(1003, 565)
-			voiture.rotation_degrees = -80
-			voiture.deplac = Vector2.ZERO
-			voiture.rot_change = 0
-		steps = 0
-		
+		if steps == sim_steps - 1:
+			var null_vec = Vector2(0, 0)
+			sorted_array = $Voitures.get_children()
+			for voiture in sorted_array:
+				voiture.alive = false
+				voiture.deplac = null_vec
+				voiture.show()
+			sorted_array.sort_custom(custom_sort)  # trier de la meilleure à la pire
+			first_gen = false
+		elif steps == sim_steps:
+			reset_sim()
+		elif steps == sim_steps + recovery_frames +1:
+			assert($Voitures.get_child_count() == nb_voitures)
+			for voiture in sorted_array:
+				voiture.alive = true
+				voiture.position = Vector2(1603, 228)
+				voiture.rotation_degrees =-142.9
+				voiture.modulate.a = 1
+			steps = 0
+			gen += 1
+		update_nn_visualiser()
+	else:
+		running = true
+	
 func reset_sim():  # 
 	for nb in range(0, nb_offsprings):
 		var voiture = sorted_array[nb]
@@ -175,9 +122,67 @@ func custom_sort(a: Node2D, b: Node2D): #high = first
 	
 func spawn_voitures():
 	var car = voitures.instantiate()
-	car.position = Vector2(1003, 565)
-	car.rotation_degrees = -80
+	car.position = Vector2(1603, 228)
+	car.rotation_degrees =-142.9
 	car.init()
 	car.alive = true
 	$Voitures.add_child(car)
 
+func update_nn_visualiser():
+	var car = $Voitures.get_child(0)
+	for voiture in $Voitures.get_children():
+		if voiture.points > car.points:
+			car = voiture
+	#$Camera2D/Arrow.position = car.get_node("Car/VoitureArea/CollisionShape2D").global_position
+	$best.text = "Gen Best: " + str(car.points) + "\nSteps: " + str(sim_steps - steps) + "\nGen: " + str(gen)
+	var c = 0
+	for input in car.nn['nb_inputs']:
+		var n = $Neurons.get_child(c)
+		if car.input[c] > 0:
+			n.modulate.r = 0
+			n.modulate.g = 0.88
+			n.modulate.b = 0.34
+			n.scale.x = (car.sigmoid(car.input[c]/100))*0.104+0.001
+			n.scale.y = n.scale.x
+		else:
+			n.modulate.r = 1
+			n.modulate.g = 0.16
+			n.modulate.b = 0.14
+			n.scale.x = (car.sigmoid(-car.input[c]/5))*0.104+0.001  # the 5 is a special case but for other project use 2 times the same div
+			n.scale.y = n.scale.x
+		c += 1
+	var d = 0
+	for layer in car.nn["nb_hidden_neurones"]:
+		for nb in range(0, layer):
+			var n = $Neurons.get_child(c)
+			n.modulate.r = 0
+			n.modulate.g = 0.88
+			n.modulate.b = 0.34
+			n.scale.x = car.nn["layers_list"][d][1][nb]*0.104+0.001
+			n.scale.y = n.scale.x
+			c += 1
+		d += 1
+	for input in car.nn['nb_outputs']:
+		var n = $Neurons.get_child(c)
+		n.modulate.r = 0
+		n.modulate.g = 0.88
+		n.modulate.b = 0.34
+		n.scale.x = car.nn["layers_list"][d][1][input]*0.104+0.001
+		n.scale.y = n.scale.x
+		c += 1
+	var e = 0
+	for i in range(car.nn["weights_list"].size()):
+		for j in range(car.nn["weights_list"][i].size()):
+			for k in range(car.nn["weights_list"][i][j].size()):
+				var l = $Lines.get_child(e)
+				if car.nn["weights_list"][i][j][k] > 0:
+					l.modulate.r = 0
+					l.modulate.g = 0.88
+					l.modulate.b = 0.34
+					l.width = ((car.sigmoid(car.nn["weights_list"][i][j][k]))*6)+0.1
+				else:
+					l.modulate.r = 1
+					l.modulate.g = 0.16
+					l.modulate.b = 0.14
+					l.width = ((car.sigmoid(-car.nn["weights_list"][i][j][k]))*6)+0.1
+				e += 1

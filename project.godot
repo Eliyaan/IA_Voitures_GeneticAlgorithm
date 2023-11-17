@@ -19,8 +19,9 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=1300
 window/size/viewport_height=700
-window/size/mode=2
+window/size/mode=3
 window/stretch/mode="canvas_items"
+window/stretch/aspect="ignore"
 
 [layer_names]
 
@@ -34,5 +35,6 @@ common/stretch/mode="canvas_items"
 
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+anti_aliasing/screen_space_roughness_limiter/enabled=false
+anti_aliasing/quality/msaa_2d=1

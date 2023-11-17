@@ -1,12 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://g81eg0hrr6ud"]
+[gd_scene load_steps=10 format=3 uid="uid://boesrpqocxnbs"]
 
 [ext_resource type="Script" path="res://codes/main.gd" id="1_c5d5b"]
 [ext_resource type="PackedScene" uid="uid://dlbqgeld5mfxf" path="res://scene/voiture.tscn" id="2_qud33"]
 [ext_resource type="PackedScene" uid="uid://s2y8mbgw2ogk" path="res://scene/neuron.tscn" id="3_47fmm"]
 [ext_resource type="PackedScene" uid="uid://mmn38yo4lrnn" path="res://scene/point_checkpoint.tscn" id="4_3d8sx"]
 [ext_resource type="PackedScene" uid="uid://dsxh8ec2jfjia" path="res://scene/line.tscn" id="4_cvvov"]
-[ext_resource type="Texture2D" uid="uid://dymv81tlqlxok" path="res://images/bkg.jpg" id="5_350i5"]
-[ext_resource type="Script" path="res://scene/wall.gd" id="6_evga0"]
+[ext_resource type="Texture2D" uid="uid://0ksbjcmwkcjy" path="res://images/bkg-final.png" id="5_ytbmg"]
+[ext_resource type="Script" path="res://codes/wall.gd" id="6_vpocr"]
+[ext_resource type="FontFile" uid="uid://bfe8yte084f2j" path="res://Dashhorizon-eZ5wg.otf" id="8_rwswd"]
+[ext_resource type="Texture2D" uid="uid://brek3keqh4p3l" path="res://images/pointing_arrow.png" id="9_xopkm"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_c5d5b")
@@ -15,21 +17,21 @@ neuron_prefab = ExtResource("3_47fmm")
 new_line = ExtResource("4_cvvov")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("5_350i5")
+texture = ExtResource("5_ytbmg")
 metadata/_edit_lock_ = true
 
 [node name="Terrain" type="Node2D" parent="."]
 
 [node name="Inside" type="Area2D" parent="Terrain"]
 collision_layer = 2
-script = ExtResource("6_evga0")
+script = ExtResource("6_vpocr")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Terrain/Inside"]
 polygon = PackedVector2Array(-1587, 102, -1537, -82, -1441, -237, -1308, -347, -1205, -392, -1129, -392, -1014, -354, -826, -278, -397, -127, -161, -114, 59, -179, 297, -282, 649, -397, 959, -437, 1168, -430, 1345, -394, 1516, -302, 1596, -213, 1619, -64, 1596, 117, 1498, 263, 1327, 378, 1096, 447, 793, 434, -280, 129, -463, 114, -651, 118, -773, 149, -905, 202, -999, 255, -1229, 383, -1359, 427, -1429, 419, -1499, 373, -1581, 225)
 
 [node name="Outside" type="Area2D" parent="Terrain"]
 collision_layer = 2
-script = ExtResource("6_evga0")
+script = ExtResource("6_vpocr")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Terrain/Outside"]
 position = Vector2(100, 34)
@@ -245,26 +247,45 @@ scale = Vector2(10.4213, 10.4213)
 [node name="Voitures" type="Node" parent="."]
 
 [node name="best" type="RichTextLabel" parent="."]
-offset_left = 94.0
-offset_top = -138.0
-offset_right = 782.0
-offset_bottom = -46.0
-scale = Vector2(0.611563, 0.611563)
-theme_override_font_sizes/normal_font_size = 60
-text = "LAST GEN BEST: "
+offset_left = 124.0
+offset_top = -181.0
+offset_right = 1674.0
+offset_bottom = 599.0
+scale = Vector2(0.593193, 0.593193)
+theme_override_fonts/normal_font = ExtResource("8_rwswd")
+theme_override_font_sizes/normal_font_size = 180
+text = "Last Gen Best: 
+Steps:
+Gen :"
 
 [node name="Lines" type="Node2D" parent="."]
-position = Vector2(122, -3)
+position = Vector2(376, 209)
+scale = Vector2(2, 2)
 
 [node name="NeurBkgd" type="Node2D" parent="."]
-position = Vector2(122, -3)
+position = Vector2(376, 209)
+scale = Vector2(2, 2)
 
 [node name="Neurons" type="Node2D" parent="."]
-position = Vector2(122, -3)
+position = Vector2(376, 209)
+scale = Vector2(2, 2)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(10, 8)
 zoom = Vector2(0.325, 0.325)
+
+[node name="Arrow" type="Node2D" parent="Camera2D"]
+visible = false
+
+[node name="Arrow" type="Sprite2D" parent="Camera2D/Arrow"]
+position = Vector2(-10, -36)
+rotation = -3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_xopkm")
+
+[node name="Voiture" parent="." instance=ExtResource("2_qud33")]
+position = Vector2(1603, 228)
+rotation = -2.49347
 
 [connection signal="area_entered" from="Terrain/Inside" to="Terrain/Inside" method="_on_area_entered"]
 [connection signal="area_entered" from="Terrain/Outside" to="Terrain/Outside" method="_on_area_entered"]
