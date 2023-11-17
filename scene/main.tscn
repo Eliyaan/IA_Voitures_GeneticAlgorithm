@@ -247,10 +247,10 @@ scale = Vector2(10.4213, 10.4213)
 [node name="Voitures" type="Node" parent="."]
 
 [node name="best" type="RichTextLabel" parent="."]
-offset_left = 124.0
-offset_top = -181.0
-offset_right = 1674.0
-offset_bottom = 599.0
+offset_left = 136.0
+offset_top = -199.0
+offset_right = 1686.0
+offset_bottom = 581.0
 scale = Vector2(0.593193, 0.593193)
 theme_override_fonts/normal_font = ExtResource("8_rwswd")
 theme_override_font_sizes/normal_font_size = 180
