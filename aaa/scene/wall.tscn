@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://b12qt4hobwfh5"]
+
+[ext_resource type="Texture2D" uid="uid://bp7gwt5ka12fp" path="res://images/wall.png" id="1_ef8rn"]
+[ext_resource type="Script" path="res://scene/wall.gd" id="1_xkk7k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6qxpr"]
+
+[node name="Wall" type="Area2D"]
+collision_layer = 0
+monitorable = false
+script = ExtResource("1_xkk7k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_6qxpr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ef8rn")
+
+[node name="WallBody" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallBody"]
+shape = SubResource("RectangleShape2D_6qxpr")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://boesrpqocxnbs"]
+[gd_scene load_steps=9 format=3 uid="uid://boesrpqocxnbs"]
 
 [ext_resource type="Script" path="res://codes/main.gd" id="1_c5d5b"]
 [ext_resource type="PackedScene" uid="uid://dlbqgeld5mfxf" path="res://scene/voiture.tscn" id="2_qud33"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://0ksbjcmwkcjy" path="res://images/bkg-final.png" id="5_ytbmg"]
 [ext_resource type="Script" path="res://codes/wall.gd" id="6_vpocr"]
 [ext_resource type="FontFile" uid="uid://bfe8yte084f2j" path="res://Dashhorizon-eZ5wg.otf" id="8_rwswd"]
-[ext_resource type="Texture2D" uid="uid://brek3keqh4p3l" path="res://images/pointing_arrow.png" id="9_xopkm"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_c5d5b")
@@ -273,15 +272,6 @@ scale = Vector2(2, 2)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(10, 8)
 zoom = Vector2(0.325, 0.325)
-
-[node name="Arrow" type="Node2D" parent="Camera2D"]
-visible = false
-
-[node name="Arrow" type="Sprite2D" parent="Camera2D/Arrow"]
-position = Vector2(-10, -36)
-rotation = -3.14159
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("9_xopkm")
 
 [node name="Voiture" parent="." instance=ExtResource("2_qud33")]
 position = Vector2(1603, 228)

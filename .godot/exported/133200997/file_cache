@@ -1,10 +1,5 @@
-res://scene/main.tscn::33d719b894e3be768336e115358ba971::1700245639::res://.godot/exported/133200997/export-fa9c8ff5b16a5ec23280afa6577b07ee-main.scn
-res://scene/point_checkpoint.tscn::4c97b4c1adb084f457784530743ae94d::1700245639::res://.godot/exported/133200997/export-d094b507951da6ad09de4cad1217423b-point_checkpoint.scn
-res://scene/voiture.tscn::28a759735a8ee7bf76e6cd8e68a1b499::1700245639::res://.godot/exported/133200997/export-8c977727c77caa31f67cc47a6b50977e-voiture.scn
-res://scene/wall.tscn::9775c36b46bf3a4d22a6bc639366855a::1700154562::res://.godot/exported/133200997/export-518334c36348fd023830da94e54cc1f3-wall.scn
-res://scene/route_droite.tscn::925973d43e819c5db0136c2f2429580e::1700154562::res://.godot/exported/133200997/export-5273b967bc87b11ce4df8895cc1fe351-route_droite.scn
-res://scene/route_tourne_droite.tscn::ca021bed18566b7326e55f24ffa31ca0::1700154562::res://.godot/exported/133200997/export-21bed893257ebab7b8264cfa4c541b54-route_tourne_droite.scn
-res://scene/car.tscn::502433ca0a945dae40beca465d045910::1700236028::res://.godot/exported/133200997/export-423d6a6c47e80fa792fb620b140807d8-car.scn
-res://scene/line.tscn::8baddee31c70c9d88f7360749b72a84f::1700245639::res://.godot/exported/133200997/export-a85d2da83e317e5e59beb034c27e0aaf-line.scn
-res://scene/main_remake.tscn::e1ae35d33c93d09b8f71c17e5cb6fa22::1700236028::res://.godot/exported/133200997/export-3d470bbb63f405686e771857093d02af-main_remake.scn
-res://scene/neuron.tscn::bc95985d1941014bd93866fccdd7c034::1700245639::res://.godot/exported/133200997/export-466094e9a9f2c3bcb89e9c85bc51509f-neuron.scn
+res://scene/main.tscn::7ffd548e16f58278f6a0aab8d7962f43::1712176077::res://.godot/exported/133200997/export-fa9c8ff5b16a5ec23280afa6577b07ee-main.scn
+res://scene/point_checkpoint.tscn::5c8a057ecee2e85f72cc4b1606369e0d::1712176077::res://.godot/exported/133200997/export-d094b507951da6ad09de4cad1217423b-point_checkpoint.scn
+res://scene/voiture.tscn::28a759735a8ee7bf76e6cd8e68a1b499::1712176077::res://.godot/exported/133200997/export-8c977727c77caa31f67cc47a6b50977e-voiture.scn
+res://scene/line.tscn::8baddee31c70c9d88f7360749b72a84f::1712176077::res://.godot/exported/133200997/export-a85d2da83e317e5e59beb034c27e0aaf-line.scn
+res://scene/neuron.tscn::bc95985d1941014bd93866fccdd7c034::1712176077::res://.godot/exported/133200997/export-466094e9a9f2c3bcb89e9c85bc51509f-neuron.scn
