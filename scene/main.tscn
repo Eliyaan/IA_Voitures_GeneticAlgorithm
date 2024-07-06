@@ -19,25 +19,19 @@ new_line = ExtResource("4_cvvov")
 texture = ExtResource("5_ytbmg")
 metadata/_edit_lock_ = true
 
-[node name="Terrain" type="Node2D" parent="."]
-
-[node name="Inside" type="Area2D" parent="Terrain"]
+[node name="Walls" type="Area2D" parent="."]
 collision_layer = 2
 script = ExtResource("6_vpocr")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Terrain/Inside"]
+[node name="Inside" type="CollisionPolygon2D" parent="Walls"]
 polygon = PackedVector2Array(-1587, 102, -1537, -82, -1441, -237, -1308, -347, -1205, -392, -1129, -392, -1014, -354, -826, -278, -397, -127, -161, -114, 59, -179, 297, -282, 649, -397, 959, -437, 1168, -430, 1345, -394, 1516, -302, 1596, -213, 1619, -64, 1596, 117, 1498, 263, 1327, 378, 1096, 447, 793, 434, -280, 129, -463, 114, -651, 118, -773, 149, -905, 202, -999, 255, -1229, 383, -1359, 427, -1429, 419, -1499, 373, -1581, 225)
 
-[node name="Outside" type="Area2D" parent="Terrain"]
-collision_layer = 2
-script = ExtResource("6_vpocr")
-
-[node name="Top" type="CollisionPolygon2D" parent="Terrain/Outside"]
+[node name="Top" type="CollisionPolygon2D" parent="Walls"]
 position = Vector2(100, 34)
 polygon = PackedVector2Array(-1883, -53, -1778, -308, -1627, -492, -1400, -623, -1219, -638, -1091, -612, -842, -503, -570, -404, -389, -369, -170, -392, 216, -552, 587, -654, 898, -688, 1216, -655, 1465, -561, 1631, -417, 1703, -279, 1736, -88, 1930, -84, 1955, -853, -2122, -857, -2179, -30)
 metadata/_edit_lock_ = true
 
-[node name="Bottom" type="CollisionPolygon2D" parent="Terrain/Outside"]
+[node name="Bottom" type="CollisionPolygon2D" parent="Walls"]
 polygon = PackedVector2Array(-1784, -23, -1797, 208, -1780, 307, -1740, 405, -1683, 489, -1616, 550, -1550, 598, -1465, 631, -1394, 646, -1328, 641, -1233, 614, -1130, 575, -951, 469, -740, 356, -536, 316, -285, 353, 477, 589, 714, 639, 959, 668, 1214, 646, 1413, 578, 1592, 459, 1748, 294, 1816, 139, 1830, -54, 2032, -54, 2008, 797, -2010, 793, -2083, -9)
 
 [node name="Points" type="Node2D" parent="."]
@@ -269,9 +263,8 @@ scale = Vector2(2, 2)
 position = Vector2(376, 209)
 scale = Vector2(2, 2)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="."]
 position = Vector2(10, 8)
 zoom = Vector2(0.325, 0.325)
 
-[connection signal="area_entered" from="Terrain/Inside" to="Terrain/Inside" method="_on_area_entered"]
-[connection signal="area_entered" from="Terrain/Outside" to="Terrain/Outside" method="_on_area_entered"]
+[connection signal="area_entered" from="Walls" to="Walls" method="_on_area_entered"]
