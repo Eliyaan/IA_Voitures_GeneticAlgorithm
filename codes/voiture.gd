@@ -118,13 +118,3 @@ func _process(_delta):
 		rot_change = (rot_change/5)*4 + ((result[1]*2 - 1) * deplac.y * 0.5)/5  # le 0.5 c'est un facteur changeable selon si on veut qu'elle tourne plus vite ou pas
 		rotation_degrees += rot_change
 		position += deplac.rotated(rotation)
-
-	
-#func _on_area_2d_body_entered(_body):
-#	alive = false
-
-
-#func _on_area_2d_area_entered(area):
-#	if "PointCheckpoint" in area.name:
-#		if points%10 == area.get_index()%10:
-#			points += 1

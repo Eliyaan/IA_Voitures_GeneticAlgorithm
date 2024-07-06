@@ -31,7 +31,7 @@ func _ready():
 		$Neurons.add_child(neuron)
 		var bg_neuron = neuron_prefab.instantiate()
 		bg_neuron.position = Vector2(400, -250+c*v_spacing)
-		$NeurBkgd.add_child(bg_neuron)
+		$NeuronsBack.add_child(bg_neuron)
 		c += 1
 	
 	var d = 1
@@ -46,7 +46,7 @@ func _ready():
 			$Neurons.add_child(neuron)
 			var bg_neuron = neuron_prefab.instantiate()
 			bg_neuron.position = Vector2(400 + d*h_spacing , -250+(c+(car.nn['nb_inputs']-layer)/2.0)*v_spacing)
-			$NeurBkgd.add_child(bg_neuron)
+			$NeuronsBack.add_child(bg_neuron)
 			c += 1
 			last_lay_nb = layer
 		d += 1
@@ -59,7 +59,7 @@ func _ready():
 		$Neurons.add_child(neuron)
 		var bg_neuron = neuron_prefab.instantiate()
 		bg_neuron.position = Vector2(400 + d*h_spacing , -250+(c+(car.nn['nb_inputs']-car.nn['nb_outputs'])/2.0)*v_spacing)
-		$NeurBkgd.add_child(bg_neuron)
+		$NeuronsBack.add_child(bg_neuron)
 		c += 1
 	#Lines
 	for i in range(0, neurons_pos_list.size()-1):
@@ -69,7 +69,7 @@ func _ready():
 				line.points[0] = coo
 				line.points[1] = sec_coo
 				line.width = 2
-				$Lines.add_child(line)
+				$NeuronsLinks.add_child(line)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -174,7 +174,7 @@ func update_nn_visualiser():
 	for i in range(car.nn["weights_list"].size()):
 		for j in range(car.nn["weights_list"][i].size()):
 			for k in range(car.nn["weights_list"][i][j].size()):
-				var l = $Lines.get_child(e)
+				var l = $NeuronsLinks.get_child(e)
 				if car.nn["weights_list"][i][j][k] > 0:
 					l.modulate.r = 0
 					l.modulate.g = 0.88

@@ -5,9 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://s2y8mbgw2ogk" path="res://scene/neuron.tscn" id="3_47fmm"]
 [ext_resource type="PackedScene" uid="uid://mmn38yo4lrnn" path="res://scene/point_checkpoint.tscn" id="4_3d8sx"]
 [ext_resource type="PackedScene" uid="uid://dsxh8ec2jfjia" path="res://scene/line.tscn" id="4_cvvov"]
-[ext_resource type="Texture2D" uid="uid://0ksbjcmwkcjy" path="res://images/bkg-final.png" id="5_ytbmg"]
+[ext_resource type="Texture2D" uid="uid://0ksbjcmwkcjy" path="res://images/background.png" id="5_ytbmg"]
 [ext_resource type="Script" path="res://codes/wall.gd" id="6_vpocr"]
-[ext_resource type="FontFile" uid="uid://bfe8yte084f2j" path="res://Dashhorizon-eZ5wg.otf" id="8_rwswd"]
+[ext_resource type="FontFile" uid="uid://bfe8yte084f2j" path="res://font.otf" id="8_rwswd"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_c5d5b")
@@ -15,7 +15,7 @@ voitures = ExtResource("2_qud33")
 neuron_prefab = ExtResource("3_47fmm")
 new_line = ExtResource("4_cvvov")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Circuit" type="Sprite2D" parent="."]
 texture = ExtResource("5_ytbmg")
 metadata/_edit_lock_ = true
 
@@ -32,7 +32,7 @@ polygon = PackedVector2Array(-1587, 102, -1537, -82, -1441, -237, -1308, -347, -
 collision_layer = 2
 script = ExtResource("6_vpocr")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Terrain/Outside"]
+[node name="Top" type="CollisionPolygon2D" parent="Terrain/Outside"]
 position = Vector2(100, 34)
 polygon = PackedVector2Array(-1883, -53, -1778, -308, -1627, -492, -1400, -623, -1219, -638, -1091, -612, -842, -503, -570, -404, -389, -369, -170, -392, 216, -552, 587, -654, 898, -688, 1216, -655, 1465, -561, 1631, -417, 1703, -279, 1736, -88, 1930, -84, 1955, -853, -2122, -857, -2179, -30)
 metadata/_edit_lock_ = true
@@ -257,11 +257,11 @@ text = "Last Gen Best:
 Steps:
 Gen :"
 
-[node name="Lines" type="Node2D" parent="."]
+[node name="NeuronsLinks" type="Node2D" parent="."]
 position = Vector2(376, 209)
 scale = Vector2(2, 2)
 
-[node name="NeurBkgd" type="Node2D" parent="."]
+[node name="NeuronsBack" type="Node2D" parent="."]
 position = Vector2(376, 209)
 scale = Vector2(2, 2)
 
@@ -272,10 +272,6 @@ scale = Vector2(2, 2)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(10, 8)
 zoom = Vector2(0.325, 0.325)
-
-[node name="Voiture" parent="." instance=ExtResource("2_qud33")]
-position = Vector2(1603, 228)
-rotation = -2.49347
 
 [connection signal="area_entered" from="Terrain/Inside" to="Terrain/Inside" method="_on_area_entered"]
 [connection signal="area_entered" from="Terrain/Outside" to="Terrain/Outside" method="_on_area_entered"]
